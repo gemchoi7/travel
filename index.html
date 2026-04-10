@@ -118,9 +118,10 @@
       const doc = new DOMParser().parseFromString(htmlText, 'text/html');
       const base = parseFilename(file);
       const title = doc.querySelector('title')?.textContent?.trim() || file;
-      const heroCities = [...doc.querySelectorAll('.hero-cities .city-badge')].map(el => el.textContent.trim());
-      const sectionCities = [...doc.querySelectorAll('.section-city')].map(el => el.textContent.trim());
-      const allCities = uniq([...heroCities, ...sectionCities]).map(titleCase);
+      const sectionCities = [...doc.querySelectorAll('.section-city')]
+      .map(el => el.textContent.trim())
+      .filter(Boolean);
+      const allCities = uniq(sectionCities);
       const countryFromTitle = title.replace(/^[^가-힣A-Za-z]+/, '').match(/(호주|일본|한국|미국|프랑스|이탈리아|스페인|영국|Australia|Japan|Korea|USA|France|Italy|Spain|United Kingdom)/i)?.[0] || '';
       const country = countryMap[base.code] || countryFromTitle || base.code.toUpperCase();
       return {
