@@ -57,6 +57,18 @@
       border:1px solid var(--color-border); background:var(--color-surface-2);
       color:var(--color-text); padding:.85rem 1rem;
     }
+    /* 👇 이 3줄만 추가하면 해결 */
+    .filter-grid,
+    .result-summary {
+      padding-left: var(--space-5); /* 👈 패널 패딩과 동일 */
+      padding-right: 0;
+    }
+    
+    .result-grid {
+      padding-left: var(--space-5); /* 👈 카드와 동일 */
+      padding-right: 0;
+    }
+
     
     .field label { display:block; margin-bottom:.5rem; font-size:var(--text-xs); color:var(--color-text-muted); text-transform:uppercase; letter-spacing:.08em; }
     
