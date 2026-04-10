@@ -57,19 +57,21 @@
       border:1px solid var(--color-border); background:var(--color-surface-2);
       color:var(--color-text); padding:.85rem 1rem;
     }
-    /* 👇 이 3줄만 추가하면 해결 */
+    /* 모든 컨테이너 좌우 폭 통일 */
     .filter-grid,
-    .result-summary {
-      padding-left: var(--space-5); /* 👈 패널 패딩과 동일 */
-      padding-right: 0;
+    .result-summary,
+    .result-grid {
+      width: 100%; /* 👈 전체 너비 */
+      padding: 0 var(--space-2) !important; /* 👈 좌우 8px만 */
+      box-sizing: border-box;
     }
     
-    .result-grid {
-      padding-left: var(--space-5); /* 👈 카드와 동일 */
-      padding-right: 0;
+    /* 카드 내부 패딩도 통일 */
+    .trip-card {
+      padding: var(--space-3) var(--space-2) !important; /* 👈 좌우 8px */
+      margin: 0;
     }
 
-    
     .field label { display:block; margin-bottom:.5rem; font-size:var(--text-xs); color:var(--color-text-muted); text-transform:uppercase; letter-spacing:.08em; }
     
     /* 모바일: 검색만 다음줄 */
@@ -91,7 +93,8 @@
     .trip-card { 
       position:relative; 
       overflow:hidden; 
-      padding: var(--space-5); /* 👈 패딩 그대로 */
+      padding: var(--space-3) var(--space-2) !important; /* 👈 좌우 8px */
+      margin: 0;
       min-height: 160px; /* 👈 230px → 160px (30% 축소) */
       display:grid; 
       gap: var(--space-2); /* 👈 var(--space-4) → var(--space-2) */
@@ -99,7 +102,8 @@
       background:linear-gradient(180deg,var(--color-surface),var(--color-surface-2)); 
       border:1px solid var(--color-border); 
     }
-    
+
+
     .trip-country { 
       margin: .3rem 0 0; /* 👈 .8rem → .3rem */
       font-size: var(--text-lg); 
