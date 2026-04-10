@@ -40,32 +40,38 @@
     h1 { margin:0 0 var(--space-2); font-family:var(--font-display); font-size:var(--text-xl); font-weight:400; }
     .intro { margin:0; color:var(--color-text-muted); }
     .theme-toggle { min-width:44px; min-height:44px; border-radius:var(--radius-full); border:1px solid var(--color-border); background:rgba(255,255,255,0.3); color:var(--color-text); display:grid; place-items:center; cursor:pointer; }
+    
+    /* 🚀 개선된 필터 그리드 - 1줄 배치 */
     .filter-grid { 
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: nowrap !important;
-  gap: var(--space-3) !important;
-  margin-top: var(--space-4);
-  align-items: stretch !important;
-  padding: var(--space-2);
-}
-
-.filter-grid > div {  /* .field들 직접 타겟 */
-  flex: 1 !important;
-  min-width: 0 !important;
-  display: flex !important;
-  flex-direction: column !important;
-}
-
-.filter-grid input,
-.filter-grid select {
-  flex: 1 !important;
-  height: 44px !important;
-  font-size: var(--text-sm) !important;
-  margin-top: 0.25rem !important;  /* 라벨과 input 간격 */
-}
+      display: grid !important;
+      grid-template-columns: 1fr 1fr auto !important;
+      gap: var(--space-3) !important;
+      margin-top: var(--space-4);
+      align-items: end !important;
+      padding: var(--space-2);
+    }
+    .filter-grid > div { display: flex !important; flex-direction: column !important; }
+    .filter-grid input, .filter-grid select {
+      flex: 1 !important; height: 44px !important; font-size: var(--text-sm) !important;
+      margin-top: 0.25rem !important; border-radius:var(--radius-md);
+      border:1px solid var(--color-border); background:var(--color-surface-2);
+      color:var(--color-text); padding:.85rem 1rem;
+    }
+    
     .field label { display:block; margin-bottom:.5rem; font-size:var(--text-xs); color:var(--color-text-muted); text-transform:uppercase; letter-spacing:.08em; }
-    .field input, .field select { width:100%; min-height:48px; border-radius:var(--radius-md); border:1px solid var(--color-border); background:var(--color-surface-2); color:var(--color-text); padding:.85rem 1rem; }
+    
+    /* 모바일: 검색만 다음줄 */
+    @media (max-width: 640px) {
+      .filter-grid { 
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: auto auto !important;
+      }
+      .filter-grid > div:nth-child(3) { 
+        grid-column: 1 / -1 !important; 
+        grid-row: 2 !important; 
+      }
+    }
+
     .result-summary { display:flex; flex-wrap:wrap; gap:var(--space-3); margin-top:var(--space-5); color:var(--color-text-muted); font-size:var(--text-sm); }
     .pill { padding:.55rem .9rem; border-radius:var(--radius-full); background:var(--color-surface-offset); border:1px solid var(--color-divider); }
     .result-grid { margin-top:var(--space-6); display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-4); }
@@ -77,32 +83,11 @@
     .trip-cities { margin:.25rem 0 0; color:var(--color-text-muted); }
     .trip-link { margin-top:auto; color:var(--color-primary); font-weight:600; text-decoration:none; }
     .empty { grid-column:1 / -1; padding:var(--space-12); border:1px dashed var(--color-border); border-radius:1.5rem; text-align:center; color:var(--color-text-muted); background:var(--color-surface-offset); }
-    @media (max-width: 480px) {
-  .filter-grid {
-    flex-direction: column !important;
-    gap: var(--space-3) !important;
-  }
-  
-  .filter-grid > div:nth-child(3) { order: 3; }  /* 검색 맨 아래 */
-  .filter-grid > div:first-child,
-  .filter-grid > div:nth-child(2) { 
-    flex: none !important; 
-    width: 48% !important; 
-  }
-  
-  .filter-grid > div:first-child + div {  /* 도시 field */
-    margin-left: var(--space-2);
-  }
-}
-
-/* 기존 미디어쿼리 수정 */
-@media (max-width: 920px) { 
-  .result-grid { grid-template-columns: 1fr; } 
-}
-@media (max-width: 640px) { 
-  .page-shell { width: min(100% - 1rem, 1080px); padding-top: var(--space-4); } 
-  .topbar { align-items:flex-start; } 
-}
+    @media (max-width: 920px) { .result-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) { 
+      .page-shell { width: min(100% - 1rem, 1080px); padding-top: var(--space-4); } 
+      .topbar { align-items:flex-start; } 
+    }
   </style>
 </head>
 <body>
@@ -133,7 +118,6 @@
     </section>
   </div>
   <script>
-    const rootHtmlFiles = ['202611_aus.html'];
     const countryMap = { aus: 'Australia', jpn: 'Japan', kor: 'Korea', usa: 'USA', fra: 'France', ita: 'Italy', esp: 'Spain', gbr: 'United Kingdom' };
     const cityFilter = document.getElementById('cityFilter');
     const countryFilter = document.getElementById('countryFilter');
@@ -143,7 +127,6 @@
     let fileData = [];
 
     function uniq(arr) { return [...new Set(arr.filter(Boolean))]; }
-    function titleCase(value) { return value ? value.replace(/\b\w/g, ch => ch.toUpperCase()) : ''; }
 
     function parseFilename(file) {
       const match = file.match(/^(\d{4})(\d{2})_([a-z0-9-]+)\.html$/i);
@@ -156,34 +139,73 @@
     }
 
     function parseDocumentMeta(file, htmlText) {
-      const doc = new DOMParser().parseFromString(htmlText, 'text/html');
-      const base = parseFilename(file);
-      const title = doc.querySelector('title')?.textContent?.trim() || file;
-      const sectionCities = [...doc.querySelectorAll('.section-city')]
-      .map(el => el.textContent.trim())
-      .filter(Boolean);
-      const allCities = uniq(sectionCities);
-      const countryFromTitle = title.replace(/^[^가-힣A-Za-z]+/, '').match(/(호주|일본|한국|미국|프랑스|이탈리아|스페인|영국|Australia|Japan|Korea|USA|France|Italy|Spain|United Kingdom)/i)?.[0] || '';
-      const country = countryMap[base.code] || countryFromTitle || base.code.toUpperCase();
-      return {
-        ...base,
-        title,
-        country,
-        cities: allCities,
-        ymLabel: base.year && base.month ? `${base.year}.${base.month}` : 'Unknown',
-        note: allCities.length ? `${allCities.length}개 도시 추출` : '도시 정보 없음',
-        href: `./${file}`,
-      };
+      try {
+        const doc = new DOMParser().parseFromString(htmlText, 'text/html');
+        const base = parseFilename(file);
+        const title = doc.querySelector('title')?.textContent?.trim() || file;
+        
+        // 🚀 개선: 더 robust한 도시 추출
+        const sectionCities = [...doc.querySelectorAll('.section-city, [data-city], .city-name')]
+          .map(el => el.textContent.trim())
+          .filter(Boolean);
+        
+        const allCities = uniq(sectionCities);
+        
+        // filename 기반 우선 (가장 안정적)
+        const country = countryMap[base.code] || base.code.toUpperCase();
+        
+        return {
+          ...base,
+          title,
+          country,
+          cities: allCities,
+          ymLabel: base.year && base.month ? `${base.year}.${base.month}` : 'Unknown',
+          note: allCities.length ? `${allCities.length}개 도시` : '도시 정보 없음',
+          href: `./${file}`,
+        };
+      } catch (error) {
+        console.error(`Parse error for ${file}:`, error);
+        const base = parseFilename(file);
+        return {
+          ...base,
+          title: file,
+          country: countryMap[base.code] || base.code.toUpperCase(),
+          cities: [],
+          ymLabel: base.year && base.month ? `${base.year}.${base.month}` : 'Unknown',
+          note: '분석 실패',
+          href: `./${file}`,
+        };
+      }
+    }
+
+    // 🚀 새로 추가: 자동 파일 탐색 (files.json 우선, 없으면 기존 방식)
+    async function discoverFiles() {
+      try {
+        const response = await fetch('./files.json');
+        if (response.ok) {
+          return await response.json();
+        }
+      } catch (e) {
+        console.log('files.json not found, using hardcoded list');
+      }
+      
+      // 기존 방식 fallback
+      return ['202611_aus.html']; 
     }
 
     async function loadFiles() {
+      const rootHtmlFiles = await discoverFiles();
       const loaded = [];
+      
       for (const file of rootHtmlFiles) {
         try {
           const response = await fetch(`./${file}`);
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          
           const text = await response.text();
           loaded.push(parseDocumentMeta(file, text));
         } catch (error) {
+          console.error(`Failed to load ${file}:`, error);
           const base = parseFilename(file);
           loaded.push({
             ...base,
@@ -191,11 +213,12 @@
             country: countryMap[base.code] || base.code.toUpperCase(),
             cities: [],
             ymLabel: base.year && base.month ? `${base.year}.${base.month}` : 'Unknown',
-            note: '분석 실패',
+            note: '로드 실패',
             href: `./${file}`,
           });
         }
       }
+      
       fileData = loaded;
       initializeFilters();
       renderResults();
@@ -227,15 +250,19 @@
       fillSelect(cityFilter, uniqueCities(scope), '전체 도시');
     }
 
+    // 🚀 개선: 다중 키워드 검색
     function getFilteredData() {
       const country = countryFilter.value.trim().toLowerCase();
       const city = cityFilter.value.trim().toLowerCase();
-      const keyword = searchInput.value.trim().toLowerCase();
+      const keyword = searchInput.value.trim();
+      
       return fileData.filter(item => {
         const hitCountry = !country || item.country.toLowerCase() === country;
         const hitCity = !city || item.cities.some(name => name.toLowerCase() === city);
+        
         const haystack = [item.file, item.country, item.title, item.note, item.ymLabel, ...item.cities].join(' ').toLowerCase();
-        const hitKeyword = !keyword || haystack.includes(keyword);
+        const hitKeyword = !keyword || keyword.split(/\s+/).every(k => haystack.includes(k.toLowerCase()));
+        
         return hitCountry && hitCity && hitKeyword;
       });
     }
@@ -244,7 +271,7 @@
       const pills = [`<span class="pill">총 <strong>${data.length}</strong>개 결과</span>`];
       if (countryFilter.value) pills.push(`<span class="pill">나라 · ${countryFilter.value}</span>`);
       if (cityFilter.value) pills.push(`<span class="pill">도시 · ${cityFilter.value}</span>`);
-      if (searchInput.value.trim()) pills.push(`<span class="pill">검색어 · ${searchInput.value.trim()}</span>`);
+      if (searchInput.value.trim()) pills.push(`<span class="pill">검색어 · "${searchInput.value.trim()}"</span>`);
       resultSummary.innerHTML = pills.join('');
     }
 
@@ -262,6 +289,7 @@
               <span class="trip-date">${item.ymLabel}</span>
               <h3 class="trip-country">${item.country}</h3>
               <p class="trip-cities">${item.cities.length ? item.cities.join(' · ') : '도시 정보 없음'}</p>
+              <small style="color:var(--color-text-muted);font-size:var(--text-xs);">${item.note}</small>
             </div>
           </div>
           <a class="trip-link" href="${item.href}">페이지 열기</a>
@@ -274,10 +302,12 @@
       syncCityOptions();
     }
 
+    // 이벤트 리스너
     countryFilter.addEventListener('change', () => { syncCityOptions(); renderResults(); });
     cityFilter.addEventListener('change', renderResults);
     searchInput.addEventListener('input', renderResults);
 
+    // 테마 토글
     (function() {
       const toggle = document.querySelector('[data-theme-toggle]');
       const root = document.documentElement;
@@ -293,9 +323,8 @@
       paint();
     })();
 
+    // 초기 로드
     loadFiles();
   </script>
 </body>
 </html>
-
-
