@@ -75,43 +75,35 @@
     .result-summary { display:flex; flex-wrap:wrap; gap:var(--space-3); margin-top:var(--space-5); color:var(--color-text-muted); font-size:var(--text-sm); }
     .pill { padding:.55rem .9rem; border-radius:var(--radius-full); background:var(--color-surface-offset); border:1px solid var(--color-divider); }
     .result-grid { margin-top:var(--space-6); display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-4); }
-    .trip-card { 
-      position:relative; 
-      overflow:hidden; 
-      padding: var(--space-3); /* 👈 var(--space-5) → var(--space-3) */
-      min-height: 200px; /* 👈 230px → 200px */
-      display:grid; 
-      gap: var(--space-3); /* 👈 var(--space-4) → var(--space-3) */
-      border-radius:1.4rem; 
-      background:linear-gradient(180deg,var(--color-surface),var(--color-surface-2)); 
-      border:1px solid var(--color-border); 
-    }
-    .trip-top { 
-      display:flex; 
-      justify-content:space-between; 
-      gap: var(--space-2); /* 👈 var(--space-3) → var(--space-2) */
-      align-items:flex-start; 
-    }
-    .trip-date { 
-      display:inline-flex; 
-      padding: .35rem .6rem; /* 👈 .45rem .75rem → 더 컴팩트 */
-      border-radius:var(--radius-full); 
-      background:var(--color-primary-highlight); 
-      color:var(--color-primary); 
-      font-size: var(--text-xs); 
-      letter-spacing:.06em; 
-      text-transform:uppercase; 
-    }
-    .trip-country { 
-      margin: .4rem 0 0; /* 👈 .8rem → .4rem */
-      font-size:var(--text-lg); 
-      font-weight:600; 
-    }
-    .trip-cities { 
-      margin: .1rem 0 0; /* 👈 .25rem → .1rem */
-      color:var(--color-text-muted); 
-      font-size: var(--text-sm); /* 👈 명시적 크기 */
-    }
+    /* 높이 축소 전용 수정 */
+.trip-card { 
+  position:relative; 
+  overflow:hidden; 
+  padding: var(--space-5); /* 👈 패딩 그대로 */
+  min-height: 160px; /* 👈 230px → 160px (30% 축소) */
+  display:grid; 
+  gap: var(--space-2); /* 👈 var(--space-4) → var(--space-2) */
+  border-radius:1.4rem; 
+  background:linear-gradient(180deg,var(--color-surface),var(--color-surface-2)); 
+  border:1px solid var(--color-border); 
+}
+
+.trip-country { 
+  margin: .3rem 0 0; /* 👈 .8rem → .3rem */
+  font-size: var(--text-lg); 
+  font-weight:600; 
+}
+
+.trip-cities { 
+  margin: .1rem 0 0; /* 👈 .25rem → .1rem */
+  color:var(--color-text-muted); 
+}
+
+.trip-date { 
+  padding: .4rem .7rem; /* 👈 약간만 축소 */
+  font-size: var(--text-xs); 
+}
+
     .trip-link { 
       margin-top: auto; 
       color:var(--color-primary); 
@@ -119,11 +111,32 @@
       text-decoration:none; 
       font-size: var(--text-sm); /* 👈 살짝 작게 */
     }
+    .trip-link { 
+  margin-top: auto; 
+  color:var(--color-primary); 
+  font-weight:600; 
+  text-decoration:none; 
+  padding: 0.4rem 0; /* 👈 세로 패딩 추가로 버튼처럼 */
+  font-size: var(--text-sm); 
+  border-radius: var(--radius-md); /* 👈 살짝 둥글게 */
+  transition: all 0.2s ease; /* 👈 호버 효과 */
+}
+
+.trip-link:hover {
+  background: var(--color-primary-highlight); /* 👈 호버시 배경 */
+  transform: translateY(-1px); /* 👈 살짝 떠오름 */
+}
+
     .trip-card::before { 
-      width: 140px;
-      height: 80px; 
-      inset: auto -20px -30px auto; /* 👈 더 작게 */
-    }
+  content:''; 
+  position:absolute; 
+  inset: auto -20px -25px auto;  /* 👈 -30px -40px → 더 작고 위로 */
+  width: 90px;                   /* 👈 140px → 90px */
+  height: 90px;                  /* 👈 140px → 90px */
+  border-radius:50%; 
+  background:radial-gradient(circle, rgba(1,105,111,0.12), transparent 72%); 
+}
+
     @media (max-width: 920px) { .result-grid { grid-template-columns: 1fr; } }
     @media (max-width: 640px) { 
       .page-shell { width: min(100% - 1rem, 1080px); padding-top: var(--space-4); } 
