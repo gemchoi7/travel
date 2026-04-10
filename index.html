@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travel List Auto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --space-2: 0.5rem; --space-3: 0.75rem; --space-4: 1rem; --space-5: 1.25rem;
+      --space-6: 1.5rem; --space-8: 2rem; --space-12: 3rem; --space-16: 4rem;
+      --color-bg: #f7f6f2; --color-surface: #f9f8f5; --color-surface-2: #fbfbf9;
+      --color-surface-offset: #f3f0ec; --color-border: #d4d1ca; --color-divider: #dcd9d5;
+      --color-text: #28251d; --color-text-muted: #7a7974; --color-text-faint: #bab9b4;
+      --color-primary: #01696f; --color-primary-highlight: #cedcd8; --color-text-inverse: #f9f8f4;
+      --shadow-md: 0 10px 30px rgba(40,37,29,0.08);
+      --radius-md: 0.5rem; --radius-full: 9999px;
+      --font-display: 'Instrument Serif', Georgia, serif; --font-body: 'Work Sans', system-ui, sans-serif;
+    }
+    [data-theme="dark"] {
+      --color-bg: #171614; --color-surface: #1c1b19; --color-surface-2: #201f1d;
+      --color-surface-offset: #1d1c1a; --color-border: #393836; --color-divider: #262523;
+      --color-text: #cdccca; --color-text-muted: #97958f; --color-text-faint: #6a6862;
+      --color-primary: #4f98a3; --color-primary-highlight: #313b3b; --color-text-inverse: #171614;
+      --shadow-md: 0 14px 38px rgba(0,0,0,0.35);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; font-family: var(--font-body); font-size: var(--text-base); line-height: 1.6; color: var(--color-text); background: radial-gradient(circle at top left, rgba(1,105,111,0.08), transparent 28%), var(--color-bg); }
+    .page-shell { width: min(1080px, calc(100% - 2rem)); margin: 0 auto; padding: var(--space-8) 0 var(--space-16); }
+    .panel { background: rgba(249,248,245,0.74); border: 1px solid var(--color-border); border-radius: min(28px, 5vw); box-shadow: var(--shadow-md); backdrop-filter: blur(14px); padding: clamp(1.25rem, 2vw, 2rem); }
+    [data-theme="dark"] .panel { background: rgba(28,27,25,0.78); }
+    .topbar { display:flex; justify-content:space-between; align-items:center; gap:var(--space-4); margin-bottom:var(--space-6); }
+    h1 { margin:0 0 var(--space-2); font-family:var(--font-display); font-size:var(--text-xl); font-weight:400; }
+    .intro { margin:0; color:var(--color-text-muted); }
+    .theme-toggle { min-width:44px; min-height:44px; border-radius:var(--radius-full); border:1px solid var(--color-border); background:rgba(255,255,255,0.3); color:var(--color-text); display:grid; place-items:center; cursor:pointer; }
+    .status { margin-top: var(--space-4); color: var(--color-text-muted); font-size: var(--text-sm); }
+    .filter-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-4); margin-top:var(--space-5); }
+    .field label { display:block; margin-bottom:.5rem; font-size:var(--text-xs); color:var(--color-text-muted); text-transform:uppercase; letter-spacing:.08em; }
+    .field input, .field select { width:100%; min-height:48px; border-radius:var(--radius-md); border:1px solid var(--color-border); background:var(--color-surface-2); color:var(--color-text); padding:.85rem 1rem; }
+    .result-summary { display:flex; flex-wrap:wrap; gap:var(--space-3); margin-top:var(--space-5); color:var(--color-text-muted); font-size:var(--text-sm); }
+    .pill { padding:.55rem .9rem; border-radius:var(--radius-full); background:var(--color-surface-offset); border:1px solid var(--color-divider); }
+    .result-grid { margin-top:var(--space-6); display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-4); }
+    .trip-card { position:relative; overflow:hidden; padding:var(--space-5); min-height:230px; display:grid; gap:var(--space-4); border-radius:1.4rem; background:linear-gradient(180deg,var(--color-surface),var(--color-surface-2)); border:1px solid var(--color-border); }
+    .trip-card::before { content:''; position:absolute; inset:auto -30px -40px auto; width:140px; height:140px; border-radius:50%; background:radial-gradient(circle, rgba(1,105,111,0.12), transparent 72%); }
+    .trip-top { display:flex; justify-content:space-between; gap:var(--space-3); align-items:flex-start; }
+    .trip-date { display:inline-flex; padding:.45rem .75rem; border-radius:var(--radius-full); background:var(--color-primary-highlight); color:var(--color-primary); font-size:var(--text-xs); letter-spacing:.06em; text-transform:uppercase; }
+    .trip-country { margin:.8rem 0 0; font-size:var(--text-lg); font-weight:600; }
+    .trip-cities { margin:.25rem 0 0; color:var(--color-text-muted); }
+    .trip-code { color:var(--color-text-faint); font-size:var(--text-sm); text-align:right; }
+    .trip-meta { display:flex; flex-wrap:wrap; gap:var(--space-2); }
+    .trip-meta span { padding:.45rem .8rem; border-radius:var(--radius-full); background:var(--color-surface-offset); border:1px solid var(--color-divider); font-size:var(--text-xs); color:var(--color-text-muted); }
+    .trip-link { margin-top:auto; color:var(--color-primary); font-weight:600; text-decoration:none; }
+    .empty { grid-column:1 / -1; padding:var(--space-12); border:1px dashed var(--color-border); border-radius:1.5rem; text-align:center; color:var(--color-text-muted); background:var(--color-surface-offset); }
+    @media (max-width: 920px) { .filter-grid, .result-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) { .page-shell { width: min(100% - 1rem, 1080px); padding-top: var(--space-4); } .topbar { align-items:flex-start; } }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <section class="panel" aria-labelledby="archive-title">
+      <div class="topbar">
+        <div>
+          <h1 id="archive-title">여행 목록</h1>
+        </div>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to dark mode"></button>
+      </div>
+      <p class="status" id="statusText">여행 페이지를 분석하는 중…</p>
+      <div class="filter-grid">
+        <div class="field">
+          <label for="countryFilter">나라</label>
+          <select id="countryFilter"><option value="">전체 나라</option></select>
+        </div>
+        <div class="field">
+          <label for="cityFilter">도시</label>
+          <select id="cityFilter"><option value="">전체 도시</option></select>
+        </div>
+        <div class="field">
+          <label for="searchInput">검색</label>
+          <input id="searchInput" type="search" placeholder="파일명, 국가, 도시 검색" />
+        </div>
+      </div>
+      <div class="result-summary" id="resultSummary" aria-live="polite"></div>
+      <div class="result-grid" id="results"></div>
+    </section>
+  </div>
+  <script>
+    const rootHtmlFiles = ['202611_aus.html'];
+    const countryMap = { aus: 'Australia', jpn: 'Japan', kor: 'Korea', usa: 'USA', fra: 'France', ita: 'Italy', esp: 'Spain', gbr: 'United Kingdom' };
+    const cityFilter = document.getElementById('cityFilter');
+    const countryFilter = document.getElementById('countryFilter');
+    const searchInput = document.getElementById('searchInput');
+    const resultSummary = document.getElementById('resultSummary');
+    const results = document.getElementById('results');
+    const statusText = document.getElementById('statusText');
+    let fileData = [];
+
+    function uniq(arr) { return [...new Set(arr.filter(Boolean))]; }
+    function titleCase(value) { return value ? value.replace(/\b\w/g, ch => ch.toUpperCase()) : ''; }
+
+    function parseFilename(file) {
+      const match = file.match(/^(\d{4})(\d{2})_([a-z0-9-]+)\.html$/i);
+      return {
+        file,
+        year: match ? match[1] : '',
+        month: match ? match[2] : '',
+        code: match ? match[3].toLowerCase() : '',
+      };
+    }
+
+    function parseDocumentMeta(file, htmlText) {
+      const doc = new DOMParser().parseFromString(htmlText, 'text/html');
+      const base = parseFilename(file);
+      const title = doc.querySelector('title')?.textContent?.trim() || file;
+      const heroCities = [...doc.querySelectorAll('.hero-cities .city-badge')].map(el => el.textContent.trim());
+      const sectionCities = [...doc.querySelectorAll('.section-city')].map(el => el.textContent.trim());
+      const allCities = uniq([...heroCities, ...sectionCities]).map(titleCase);
+      const countryFromTitle = title.replace(/^[^가-힣A-Za-z]+/, '').match(/(호주|일본|한국|미국|프랑스|이탈리아|스페인|영국|Australia|Japan|Korea|USA|France|Italy|Spain|United Kingdom)/i)?.[0] || '';
+      const country = countryMap[base.code] || countryFromTitle || base.code.toUpperCase();
+      return {
+        ...base,
+        title,
+        country,
+        cities: allCities,
+        ymLabel: base.year && base.month ? `${base.year}.${base.month}` : 'Unknown',
+        note: allCities.length ? `${allCities.length}개 도시 추출` : '도시 정보 없음',
+        href: `./${file}`,
+      };
+    }
+
+    async function loadFiles() {
+      const loaded = [];
+      for (const file of rootHtmlFiles) {
+        try {
+          const response = await fetch(`./${file}`);
+          const text = await response.text();
+          loaded.push(parseDocumentMeta(file, text));
+        } catch (error) {
+          const base = parseFilename(file);
+          loaded.push({
+            ...base,
+            title: file,
+            country: countryMap[base.code] || base.code.toUpperCase(),
+            cities: [],
+            ymLabel: base.year && base.month ? `${base.year}.${base.month}` : 'Unknown',
+            note: '분석 실패',
+            href: `./${file}`,
+          });
+        }
+      }
+      fileData = loaded;
+      statusText.textContent = `${fileData.length}개 여행 HTML 분석 완료`;
+      initializeFilters();
+      renderResults();
+    }
+
+    function uniqueCountries(source) {
+      return uniq(source.map(item => item.country)).sort((a, b) => a.localeCompare(b));
+    }
+
+    function uniqueCities(source) {
+      return uniq(source.flatMap(item => item.cities)).sort((a, b) => a.localeCompare(b));
+    }
+
+    function fillSelect(select, values, placeholder) {
+      const current = select.value;
+      select.innerHTML = `<option value="">${placeholder}</option>`;
+      values.forEach(value => {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = value;
+        select.appendChild(option);
+      });
+      if ([...select.options].some(option => option.value === current)) select.value = current;
+    }
+
+    function syncCityOptions() {
+      const country = countryFilter.value.trim().toLowerCase();
+      const scope = country ? fileData.filter(item => item.country.toLowerCase() === country) : fileData;
+      fillSelect(cityFilter, uniqueCities(scope), '전체 도시');
+    }
+
+    function getFilteredData() {
+      const country = countryFilter.value.trim().toLowerCase();
+      const city = cityFilter.value.trim().toLowerCase();
+      const keyword = searchInput.value.trim().toLowerCase();
+      return fileData.filter(item => {
+        const hitCountry = !country || item.country.toLowerCase() === country;
+        const hitCity = !city || item.cities.some(name => name.toLowerCase() === city);
+        const haystack = [item.file, item.country, item.title, item.note, item.ymLabel, ...item.cities].join(' ').toLowerCase();
+        const hitKeyword = !keyword || haystack.includes(keyword);
+        return hitCountry && hitCity && hitKeyword;
+      });
+    }
+
+    function createSummary(data) {
+      const pills = [`<span class="pill">총 <strong>${data.length}</strong>개 결과</span>`];
+      if (countryFilter.value) pills.push(`<span class="pill">나라 · ${countryFilter.value}</span>`);
+      if (cityFilter.value) pills.push(`<span class="pill">도시 · ${cityFilter.value}</span>`);
+      if (searchInput.value.trim()) pills.push(`<span class="pill">검색어 · ${searchInput.value.trim()}</span>`);
+      resultSummary.innerHTML = pills.join('');
+    }
+
+    function renderResults() {
+      const filtered = getFilteredData();
+      createSummary(filtered);
+      if (!filtered.length) {
+        results.innerHTML = `<div class="empty"><strong>조건에 맞는 여행 페이지가 없습니다.</strong><br>필터를 바꿔 다시 찾아보세요.</div>`;
+        return;
+      }
+      results.innerHTML = filtered.map(item => `
+        <article class="trip-card">
+          <div class="trip-top">
+            <div>
+              <span class="trip-date">${item.ymLabel}</span>
+              <h3 class="trip-country">${item.country}</h3>
+              <p class="trip-cities">${item.cities.length ? item.cities.join(' · ') : '도시 정보 없음'}</p>
+            </div>
+            <div class="trip-code">${item.file}</div>
+          </div>
+          <div class="trip-meta">
+            <span>Code · ${item.code.toUpperCase()}</span>
+            <span>${item.note}</span>
+          </div>
+          <a class="trip-link" href="${item.href}">페이지 열기</a>
+        </article>
+      `).join('');
+    }
+
+    function initializeFilters() {
+      fillSelect(countryFilter, uniqueCountries(fileData), '전체 나라');
+      syncCityOptions();
+    }
+
+    countryFilter.addEventListener('change', () => { syncCityOptions(); renderResults(); });
+    cityFilter.addEventListener('change', renderResults);
+    searchInput.addEventListener('input', renderResults);
+
+    (function() {
+      const toggle = document.querySelector('[data-theme-toggle]');
+      const root = document.documentElement;
+      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      function paint() {
+        root.setAttribute('data-theme', theme);
+        toggle.setAttribute('aria-label', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+        toggle.innerHTML = theme === 'dark'
+          ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg>'
+          : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+      }
+      toggle.addEventListener('click', () => { theme = theme === 'dark' ? 'light' : 'dark'; paint(); });
+      paint();
+    })();
+
+    loadFiles();
+  </script>
+</body>
+</html>
+
+
