@@ -40,7 +40,10 @@
     h1 { margin:0 0 var(--space-2); font-family:var(--font-display); font-size:var(--text-xl); font-weight:400; }
     .intro { margin:0; color:var(--color-text-muted); }
     .theme-toggle { min-width:44px; min-height:44px; border-radius:var(--radius-full); border:1px solid var(--color-border); background:rgba(255,255,255,0.3); color:var(--color-text); display:grid; place-items:center; cursor:pointer; }
-    .filter-grid { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 0.75rem; margin-top: var(--space-4); }
+    .filter-grid { display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; gap: var(--space-3); margin-top: var(--space-4); align-items: stretch; }
+    .filter-grid .field { flex: 1 !important; min-width: 0; }
+    .filter-grid input,
+    .filter-grid select { height: 48px !important; font-size: var(--text-sm) !important; }
     .field label { display:block; margin-bottom:.5rem; font-size:var(--text-xs); color:var(--color-text-muted); text-transform:uppercase; letter-spacing:.08em; }
     .field input, .field select { width:100%; min-height:48px; border-radius:var(--radius-md); border:1px solid var(--color-border); background:var(--color-surface-2); color:var(--color-text); padding:.85rem 1rem; }
     .result-summary { display:flex; flex-wrap:wrap; gap:var(--space-3); margin-top:var(--space-5); color:var(--color-text-muted); font-size:var(--text-sm); }
@@ -54,8 +57,14 @@
     .trip-cities { margin:.25rem 0 0; color:var(--color-text-muted); }
     .trip-link { margin-top:auto; color:var(--color-primary); font-weight:600; text-decoration:none; }
     .empty { grid-column:1 / -1; padding:var(--space-12); border:1px dashed var(--color-border); border-radius:1.5rem; text-align:center; color:var(--color-text-muted); background:var(--color-surface-offset); }
-    @media (max-width: 920px) { .filter-grid, .result-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 920px) { .result-grid { grid-template-columns: 1fr; } }
     @media (max-width: 640px) { .page-shell { width: min(100% - 1rem, 1080px); padding-top: var(--space-4); } .topbar { align-items:flex-start; } }
+    @media (max-width: 480px) { .filter-grid { flex-direction: column !important; gap: var(--space-2); }
+    .filter-grid .field:nth-child(3) { order: 2; }
+    .filter-grid .field:first-child,
+    .filter-grid .field:nth-child(2) { display: flex; gap: var(--space-2); }
+    .filter-grid .field:first-child,
+    .filter-grid .field:nth-child(2) { flex: none; width: 48%; } }
   </style>
 </head>
 <body>
