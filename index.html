@@ -99,9 +99,16 @@
       color:var(--color-text-muted); 
     }
     
+    /* 날짜: 기존 그대로 복원 */
     .trip-date { 
-      padding: .4rem .7rem; /* 👈 약간만 축소 */
+      display:inline-flex; 
+      padding: .45rem .75rem;  /* 👈 기존 크기 복원 */
+      border-radius:var(--radius-full); 
+      background:var(--color-primary-highlight); 
+      color:var(--color-primary); 
       font-size: var(--text-xs); 
+      letter-spacing:.06em; 
+      text-transform:uppercase; 
     }
 
     .trip-link { 
