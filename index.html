@@ -53,9 +53,6 @@
     .trip-date { display:inline-flex; padding:.45rem .75rem; border-radius:var(--radius-full); background:var(--color-primary-highlight); color:var(--color-primary); font-size:var(--text-xs); letter-spacing:.06em; text-transform:uppercase; }
     .trip-country { margin:.8rem 0 0; font-size:var(--text-lg); font-weight:600; }
     .trip-cities { margin:.25rem 0 0; color:var(--color-text-muted); }
-    .trip-code { color:var(--color-text-faint); font-size:var(--text-sm); text-align:right; }
-    .trip-meta { display:flex; flex-wrap:wrap; gap:var(--space-2); }
-    .trip-meta span { padding:.45rem .8rem; border-radius:var(--radius-full); background:var(--color-surface-offset); border:1px solid var(--color-divider); font-size:var(--text-xs); color:var(--color-text-muted); }
     .trip-link { margin-top:auto; color:var(--color-primary); font-weight:600; text-decoration:none; }
     .empty { grid-column:1 / -1; padding:var(--space-12); border:1px dashed var(--color-border); border-radius:1.5rem; text-align:center; color:var(--color-text-muted); background:var(--color-surface-offset); }
     @media (max-width: 920px) { .filter-grid, .result-grid { grid-template-columns: 1fr; } }
@@ -223,11 +220,6 @@
               <h3 class="trip-country">${item.country}</h3>
               <p class="trip-cities">${item.cities.length ? item.cities.join(' · ') : '도시 정보 없음'}</p>
             </div>
-            <div class="trip-code">${item.file}</div>
-          </div>
-          <div class="trip-meta">
-            <span>Code · ${item.code.toUpperCase()}</span>
-            <span>${item.note}</span>
           </div>
           <a class="trip-link" href="${item.href}">페이지 열기</a>
         </article>
