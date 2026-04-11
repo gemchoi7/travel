@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko" data-theme="light">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Travel List Auto</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,114 +14,259 @@
       --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
       --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
       --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
-      --space-xs: clamp(0.5rem, 0.75vw, 0.75rem);
-      --space-sm: clamp(0.75rem, 1vw, 1rem);
+      --space-xs: clamp(0.5rem, 0.8vw, 0.75rem);
+      --space-sm: clamp(0.85rem, 1vw, 1rem);
       --space-md: clamp(1rem, 1.25vw, 1.25rem);
-      --space-lg: clamp(1.25rem, 1.75vw, 1.5rem);
-      --space-xl: clamp(1.5rem, 2.25vw, 2rem);
-      --color-bg: #f7f6f2; --color-surface: #f9f8f5; --color-surface-2: #fbfbf9;
-      --color-surface-offset: #f3f0ec; --color-border: #d4d1ca; --color-divider: #dcd9d5;
-      --color-text: #28251d; --color-text-muted: #7a7974; --color-text-faint: #bab9b4;
-      --color-primary: #01696f; --color-primary-highlight: #cedcd8; --color-text-inverse: #f9f8f4;
+      --space-lg: clamp(1.35rem, 1.8vw, 1.6rem);
+      --space-xl: clamp(1.7rem, 2.4vw, 2.2rem);
+      --color-bg: #f7f6f2;
+      --color-surface: #f9f8f5;
+      --color-surface-2: #fbfbf9;
+      --color-surface-offset: #f3f0ec;
+      --color-border: #d4d1ca;
+      --color-divider: #dcd9d5;
+      --color-text: #28251d;
+      --color-text-muted: #7a7974;
+      --color-text-faint: #bab9b4;
+      --color-primary: #01696f;
+      --color-primary-highlight: #cedcd8;
+      --color-text-inverse: #f9f8f4;
       --shadow-md: 0 10px 30px rgba(40,37,29,0.08);
-      --radius-md: 0.5rem; --radius-full: 9999px; --radius-panel: clamp(12px, 2vw, 16px);
-      --font-display: 'Instrument Serif', Georgia, serif; --font-body: 'Work Sans', system-ui, sans-serif;
+      --radius-md: 0.5rem;
+      --radius-full: 9999px;
+      --radius-panel: clamp(12px, 2vw, 16px);
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-body: 'Work Sans', system-ui, sans-serif;
     }
+
     [data-theme="dark"] {
-      --color-bg: #171614; --color-surface: #1c1b19; --color-surface-2: #201f1d;
-      --color-surface-offset: #1d1c1a; --color-border: #393836; --color-divider: #262523;
-      --color-text: #cdccca; --color-text-muted: #97958f; --color-text-faint: #6a6862;
-      --color-primary: #4f98a3; --color-primary-highlight: #313b3b; --color-text-inverse: #171614;
+      --color-bg: #171614;
+      --color-surface: #1c1b19;
+      --color-surface-2: #201f1d;
+      --color-surface-offset: #1d1c1a;
+      --color-border: #393836;
+      --color-divider: #262523;
+      --color-text: #cdccca;
+      --color-text-muted: #97958f;
+      --color-text-faint: #6a6862;
+      --color-primary: #4f98a3;
+      --color-primary-highlight: #313b3b;
+      --color-text-inverse: #171614;
       --shadow-md: 0 14px 38px rgba(0,0,0,0.35);
     }
+
     * { box-sizing: border-box; }
-    body { 
-      margin: 0; min-height: 100vh; font-family: var(--font-body); 
-      font-size: var(--text-base); line-height: 1.6; color: var(--color-text); 
-      background: radial-gradient(circle at top left, rgba(1,105,111,0.08), transparent 28%), var(--color-bg); 
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--color-text);
+      background: radial-gradient(circle at top left, rgba(1,105,111,0.08), transparent 28%), var(--color-bg);
     }
 
-    .page-shell { width: min(1080px, calc(100% - var(--space-md)*2)); max-width: 100vw; margin: 0 auto; padding: var(--space-lg) 0 var(--space-xl); }
-    
-    .panel { 
-      background: rgba(249,248,245,0.85); border: 1px solid var(--color-border); 
-      border-radius: var(--radius-panel); box-shadow: var(--shadow-md); 
-      backdrop-filter: blur(14px); padding: var(--space-md); 
-    }
-    [data-theme="dark"] .panel { background: rgba(28,27,25,0.85); }
-
-    .topbar { padding: var(--space-sm) 0; margin-bottom: var(--space-md); }
-    h1 { margin: 0; font-family: var(--font-display); font-size: var(--text-xl); font-weight: 400; }
-
-    /* 🎯 모든 화면에서 1줄 3개 필터 */
-    .filter-grid { 
-      display: grid; 
-      grid-template-columns: 1.4fr 1.4fr 1fr; /* 데스크톱: 넓게 */
-      gap: var(--space-sm); 
-      margin-top: var(--space-md); 
-      align-items: end; 
-      padding: 0 var(--space-xs); 
-      width: 100%; 
-    }
-    .filter-grid > div { display: flex; flex-direction: column; }
-
-    .filter-grid input, .filter-grid select {
-      flex: 1; height: clamp(40px, 5.5vw, 42px); /* 모바일 높이 약간 축소 */
-      font-size: var(--text-sm); margin-top: 0.25rem; 
-      border-radius: var(--radius-md); border: 1px solid var(--color-border); 
-      background: var(--color-surface-2); color: var(--color-text); 
-      padding: 0.625rem 2rem 0.625rem 0.75rem; /* 모바일 패딩 최적화 */
-      background-position: right 0.625rem center; background-repeat: no-repeat;
-      background-size: 0.875rem;
-    }
-    .filter-grid select { 
-      background-image: url("image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%237a7974' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 2 2 3-3'/%3E%3C/svg%3E"); 
-    }
-    .filter-grid input { 
-      background-image: url("image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%237a7974' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M3 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4Z'/%3E%3Cpath stroke='%237a7974' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m9 10a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z'/%3E%3Cpath stroke='%237a7974' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M7.5 7.5 10 10m0 0 2.5-2.5M10 10V6.5'/%3E%3C/svg%3E"); 
-    }
-    .field label { 
-      display: block; margin-bottom: 0.375rem; font-size: var(--text-xs); 
-      color: var(--color-text-muted); text-transform: uppercase; letter-spacing: .08em; 
+    .page-shell {
+      width: min(1080px, calc(100% - var(--space-md) * 2));
+      max-width: 100vw;
+      margin: 0 auto;
+      padding: var(--space-lg) 0 var(--space-lg);
     }
 
-    .result-summary { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-lg); color: var(--color-text-muted); font-size: var(--text-sm); padding: 0 var(--space-xs); }
-    .pill { padding: 0.5rem 0.875rem; border-radius: var(--radius-full); background: var(--color-surface-offset); border: 1px solid var(--color-divider); }
-
-    .result-grid { margin-top: var(--space-lg); display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-md); padding: 0 var(--space-xs); }
-
-    .trip-card { 
-      padding: var(--space-md); min-height: clamp(140px, 22vh, 160px); 
-      display: grid; gap: var(--space-sm); border-radius: 1.125rem; 
-      background: linear-gradient(180deg, var(--color-surface), var(--color-surface-2)); 
-      border: 1px solid var(--color-border); margin: 0;
+    .panel {
+      background: rgba(249,248,245,0.85);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-panel);
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(14px);
+      padding: var(--space-lg) var(--space-lg) var(--space-lg) var(--space-lg);
     }
 
-    .trip-top { display: flex; justify-content: space-between; gap: var(--space-xs); align-items: flex-start; }
-    .trip-date { display: inline-flex; padding: 0.4rem 0.625rem; border-radius: var(--radius-full); background: var(--color-primary-highlight); color: var(--color-primary); font-size: var(--text-xs); letter-spacing: .06em; text-transform: uppercase; }
-    .trip-country { margin: 0.25rem 0 0; font-size: var(--text-lg); font-weight: 600; line-height: 1.2; }
-    .trip-cities { margin: 0.125rem 0 0; color: var(--color-text-muted); font-size: var(--text-sm); }
-    .trip-link { margin-top: auto; color: var(--color-primary); font-weight: 600; text-decoration: none; padding: 0.5rem 0; font-size: var(--text-sm); border-radius: var(--radius-md); transition: all 0.2s ease; text-align: center; }
-    .trip-link:hover, .trip-link:focus { background: var(--color-primary-highlight); transform: translateY(-1px); }
+    [data-theme="dark"] .panel {
+      background: rgba(28,27,25,0.85);
+    }
 
-    .empty { grid-column: 1/-1; padding: var(--space-xl); border: 1px dashed var(--color-border); border-radius: 1.25rem; text-align: center; color: var(--color-text-muted); background: var(--color-surface-offset); }
+    .topbar {
+      padding: 0;
+      margin-bottom: var(--space-md);
+    }
 
-    /* 🎯 모바일에서도 1줄 유지 (iPhone 15 기준 완벽) */
+    h1 {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 400;
+    }
+
+    .filter-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1.3fr 1fr;
+      gap: var(--space-sm);
+      margin-top: var(--space-sm);
+      align-items: end;
+      padding: 0;
+      width: 100%;
+    }
+
+    .filter-grid > div {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .filter-grid input,
+    .filter-grid select {
+      height: clamp(42px, 5.5vw, 44px);
+      font-size: var(--text-sm);
+      margin-top: 0.25rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      background: var(--color-surface-2);
+      color: var(--color-text);
+      padding: 0.75rem 0.875rem;
+      min-width: 0;
+    }
+
+    .filter-grid select {
+      padding-right: 2.25rem;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%237a7974' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 2 2 3-3'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      background-size: 1rem;
+    }
+
+    .filter-grid input {
+      padding-right: 0.875rem;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 0.375rem;
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .result-summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin-top: var(--space-md);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      padding: 0;
+    }
+
+    .pill {
+      padding: 0.5rem 0.875rem;
+      border-radius: var(--radius-full);
+      background: var(--color-surface-offset);
+      border: 1px solid var(--color-divider);
+    }
+
+    .result-grid {
+      margin-top: var(--space-sm);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-md);
+      padding: 0;
+    }
+
+    .trip-card {
+      padding: var(--space-md);
+      min-height: 132px;
+      display: grid;
+      gap: var(--space-xs);
+      border-radius: 1.125rem;
+      background: linear-gradient(180deg, var(--color-surface), var(--color-surface-2));
+      border: 1px solid var(--color-border);
+      margin: 0;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+
+    .trip-card:hover,
+    .trip-card:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(40,37,29,0.10);
+      border-color: var(--color-primary);
+      outline: none;
+    }
+
+    .trip-top {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-xs);
+      align-items: flex-start;
+    }
+
+    .trip-date {
+      display: inline-flex;
+      padding: 0.4rem 0.625rem;
+      border-radius: var(--radius-full);
+      background: var(--color-primary-highlight);
+      color: var(--color-primary);
+      font-size: var(--text-xs);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .trip-country {
+      margin: 0.25rem 0 0;
+      font-size: var(--text-lg);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .trip-cities {
+      margin: 0.125rem 0 0;
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      padding: var(--space-xl);
+      border: 1px dashed var(--color-border);
+      border-radius: 1.25rem;
+      text-align: center;
+      color: var(--color-text-muted);
+      background: var(--color-surface-offset);
+    }
+
+    @media (max-width: 640px) {
+      .filter-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-sm);
+      }
+
+      .filter-grid > div:nth-child(3) {
+        grid-column: 1 / -1;
+      }
+
+      .page-shell {
+        padding: var(--space-lg) 0 var(--space-lg);
+      }
+
+      .panel {
+        padding: var(--space-lg);
+      }
+    }
+
     @media (max-width: 480px) {
-      .filter-grid { 
-        grid-template-columns: 1.2fr 1.2fr 1fr !important; /* 모바일도 1줄 */
-        gap: var(--space-xs) !important; /* 간격 좁힘 */
+      .result-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-sm);
       }
-      .filter-grid input, .filter-grid select { 
-        height: 40px; padding: 0.5rem 1.75rem 0.5rem 0.75rem; /* 컴팩트 */
-        font-size: clamp(0.8rem, 3vw, 0.875rem);
-      }
-      .field label { font-size: 0.7rem; margin-bottom: 0.25rem; }
-      .page-shell { padding: var(--space-sm) 0 var(--space-md); }
-      .result-grid { grid-template-columns: 1fr; gap: var(--space-sm); }
     }
-    
-    [data-theme-toggle], .theme-toggle { display: none !important; }
+
+    [data-theme-toggle],
+    .theme-toggle {
+      display: none !important;
+    }
   </style>
 </head>
 <body>
@@ -130,7 +275,7 @@
       <div class="topbar">
         <h1 id="archive-title">여행 목록</h1>
       </div>
-      
+
       <div class="filter-grid">
         <div class="field">
           <label for="countryFilter">나라</label>
@@ -142,15 +287,17 @@
         </div>
         <div class="field">
           <label for="searchInput">검색</label>
-          <input id="searchInput" type="search" placeholder="파일명, 국가, 도시 검색"/>
+          <input id="searchInput" type="search" placeholder="파일명, 국가, 도시 검색" />
         </div>
       </div>
+
       <div class="result-summary" id="resultSummary" aria-live="polite"></div>
       <div class="result-grid" id="results"></div>
     </section>
   </div>
+
   <script>
-    const countryMap = { aus:'Australia', jpn:'Japan', kor:'Korea', usa:'USA', fra:'France', ita:'Italy', esp:'Spain', gbr:'United Kingdom' };
+    const countryMap = { aus: 'Australia', jpn: 'Japan', kor: 'Korea', usa: 'USA', fra: 'France', ita: 'Italy', esp: 'Spain', gbr: 'United Kingdom' };
     const cityFilter = document.getElementById('cityFilter');
     const countryFilter = document.getElementById('countryFilter');
     const searchInput = document.getElementById('searchInput');
@@ -170,20 +317,32 @@
         const doc = new DOMParser().parseFromString(htmlText, 'text/html');
         const base = parseFilename(file);
         const title = doc.querySelector('title')?.textContent?.trim() || file;
-        const sectionCities = [...doc.querySelectorAll('.section-city, [data-city], .city-name')]
-          .map(el => el.textContent.trim()).filter(Boolean);
+        const sectionCities = [...doc.querySelectorAll('.section-city, [data-city], .city-name, .city, .travel-city, h2, h3')]
+          .map(el => el.textContent.trim())
+          .filter(Boolean)
+          .filter(t => t.length < 40);
         const allCities = uniq(sectionCities);
         const country = countryMap[base.code] || base.code.toUpperCase();
         return {
-          ...base, title, country, cities: allCities,
+          ...base,
+          title,
+          country,
+          cities: allCities,
           ymLabel: base.year && base.month ? `${base.year}.${base.month}` : 'Unknown',
           note: allCities.length ? `${allCities.length}개 도시` : '도시 정보 없음',
           href: `./${file}`,
         };
       } catch (error) {
-        console.error(`Parse error for ${file}:`, error);
         const base = parseFilename(file);
-        return { ...base, title: file, country: countryMap[base.code] || base.code.toUpperCase(), cities: [], ymLabel: base.year && base.month ? `${base.year}.${base.month}` : 'Unknown', note: '분석 실패', href: `./${file}` };
+        return {
+          ...base,
+          title: file,
+          country: countryMap[base.code] || base.code.toUpperCase(),
+          cities: [],
+          ymLabel: base.year && base.month ? `${base.year}.${base.month}` : 'Unknown',
+          note: '분석 실패',
+          href: `./${file}`,
+        };
       }
     }
 
@@ -191,7 +350,7 @@
       try {
         const response = await fetch('./files.json');
         if (response.ok) return await response.json();
-      } catch (e) { console.log('files.json not found, using hardcoded'); }
+      } catch (e) {}
       return ['202611_aus.html'];
     }
 
@@ -205,9 +364,16 @@
           const text = await response.text();
           loaded.push(parseDocumentMeta(file, text));
         } catch (error) {
-          console.error(`Failed to load ${file}:`, error);
           const base = parseFilename(file);
-          loaded.push({ ...base, title: file, country: countryMap[base.code] || base.code.toUpperCase(), cities: [], ymLabel: base.year && base.month ? `${base.year}.${base.month}` : 'Unknown', note: '로드 실패', href: `./${file}` });
+          loaded.push({
+            ...base,
+            title: file,
+            country: countryMap[base.code] || base.code.toUpperCase(),
+            cities: [],
+            ymLabel: base.year && base.month ? `${base.year}.${base.month}` : 'Unknown',
+            note: '로드 실패',
+            href: `./${file}`,
+          });
         }
       }
       fileData = loaded;
@@ -215,15 +381,21 @@
       renderResults();
     }
 
-    function uniqueCountries(source) { return uniq(source.map(item => item.country)).sort((a, b) => a.localeCompare(b)); }
-    function uniqueCities(source) { return uniq(source.flatMap(item => item.cities)).sort((a, b) => a.localeCompare(b)); }
+    function uniqueCountries(source) {
+      return uniq(source.map(item => item.country)).sort((a, b) => a.localeCompare(b));
+    }
+
+    function uniqueCities(source) {
+      return uniq(source.flatMap(item => item.cities)).sort((a, b) => a.localeCompare(b));
+    }
 
     function fillSelect(select, values, placeholder) {
       const current = select.value;
       select.innerHTML = `<option value="">${placeholder}</option>`;
       values.forEach(value => {
         const option = document.createElement('option');
-        option.value = value; option.textContent = value;
+        option.value = value;
+        option.textContent = value;
         select.appendChild(option);
       });
       if ([...select.options].some(option => option.value === current)) select.value = current;
@@ -264,19 +436,16 @@
         return;
       }
       results.innerHTML = filtered.map(item => `
-        <article class="trip-card">
+        <article class="trip-card" data-href="${item.href}" role="link" tabindex="0">
           <div class="trip-top">
             <div>
               <span class="trip-date">${item.ymLabel}</span>
               <h3 class="trip-country">${item.country}</h3>
               <p class="trip-cities">
-                ${item.cities.length ? 
-                  (item.cities.length <= 2 ? item.cities.join(' · ') : `${item.cities[0]} 외 ${item.cities.length-1}개`) : 
-                  '도시 정보 없음'}
+                ${item.cities.length ? (item.cities.length <= 2 ? item.cities.join(' · ') : `${item.cities[0]} 외 ${item.cities.length-1}개`) : '도시 정보 없음'}
               </p>
             </div>
           </div>
-          <a class="trip-link" href="${item.href}">페이지 열기</a>
         </article>
       `).join('');
     }
@@ -286,11 +455,26 @@
       syncCityOptions();
     }
 
-    countryFilter.addEventListener('change', () => { syncCityOptions(); renderResults(); });
+    countryFilter.addEventListener('change', () => {
+      syncCityOptions();
+      renderResults();
+    });
     cityFilter.addEventListener('change', renderResults);
     searchInput.addEventListener('input', renderResults);
 
-    // 🎉 테마토글 관련 코드 완전 제거
+    results.addEventListener('click', (e) => {
+      const card = e.target.closest('.trip-card');
+      if (card?.dataset.href) location.href = card.dataset.href;
+    });
+
+    results.addEventListener('keydown', (e) => {
+      if ((e.key === 'Enter' || e.key === ' ') && e.target.closest('.trip-card')) {
+        e.preventDefault();
+        const card = e.target.closest('.trip-card');
+        if (card?.dataset.href) location.href = card.dataset.href;
+      }
+    });
+
     loadFiles();
   </script>
 </body>
