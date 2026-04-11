@@ -51,39 +51,51 @@
     [data-theme="dark"] .panel { background: rgba(28,27,25,0.85); }
 
     .topbar { padding: var(--space-sm) 0; margin-bottom: var(--space-md); }
-
     h1 { margin: 0; font-family: var(--font-display); font-size: var(--text-xl); font-weight: 400; }
 
+    /* 🎯 모든 화면에서 1줄 3개 필터 */
     .filter-grid { 
-      display: grid; grid-template-columns: 1fr 1fr auto; gap: var(--space-sm); 
-      margin-top: var(--space-md); align-items: end; padding: 0 var(--space-xs); width: 100%; 
+      display: grid; 
+      grid-template-columns: 1.4fr 1.4fr 1fr; /* 데스크톱: 넓게 */
+      gap: var(--space-sm); 
+      margin-top: var(--space-md); 
+      align-items: end; 
+      padding: 0 var(--space-xs); 
+      width: 100%; 
     }
     .filter-grid > div { display: flex; flex-direction: column; }
+
     .filter-grid input, .filter-grid select {
-      flex: 1; height: clamp(42px, 5.5vw, 44px); font-size: var(--text-sm);
-      margin-top: 0.25rem; border-radius: var(--radius-md);
-      border: 1px solid var(--color-border); background: var(--color-surface-2);
-      color: var(--color-text); padding: 0.75rem 2.25rem 0.75rem 0.875rem;
-      background-position: right 0.75rem center; background-repeat: no-repeat;
-      background-size: 1rem; background-image: url("image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%237a7974' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 2 2 3-3'/%3E%3C/svg%3E");
+      flex: 1; height: clamp(40px, 5.5vw, 42px); /* 모바일 높이 약간 축소 */
+      font-size: var(--text-sm); margin-top: 0.25rem; 
+      border-radius: var(--radius-md); border: 1px solid var(--color-border); 
+      background: var(--color-surface-2); color: var(--color-text); 
+      padding: 0.625rem 2rem 0.625rem 0.75rem; /* 모바일 패딩 최적화 */
+      background-position: right 0.625rem center; background-repeat: no-repeat;
+      background-size: 0.875rem;
     }
-    .filter-grid input { background-image: url("image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%237a7974' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M3 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4Z'/%3E%3Cpath stroke='%237a7974' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m9 10a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z'/%3E%3Cpath stroke='%237a7974' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M7.5 7.5 10 10m0 0 2.5-2.5M10 10V6.5'/%3E%3C/svg%3E"); padding-right: 2.75rem; }
-    .field label { display: block; margin-bottom: 0.375rem; font-size: var(--text-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: .08em; }
+    .filter-grid select { 
+      background-image: url("image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%237a7974' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 2 2 3-3'/%3E%3C/svg%3E"); 
+    }
+    .filter-grid input { 
+      background-image: url("image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%237a7974' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M3 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4Z'/%3E%3Cpath stroke='%237a7974' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m9 10a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z'/%3E%3Cpath stroke='%237a7974' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M7.5 7.5 10 10m0 0 2.5-2.5M10 10V6.5'/%3E%3C/svg%3E"); 
+    }
+    .field label { 
+      display: block; margin-bottom: 0.375rem; font-size: var(--text-xs); 
+      color: var(--color-text-muted); text-transform: uppercase; letter-spacing: .08em; 
+    }
 
     .result-summary { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-lg); color: var(--color-text-muted); font-size: var(--text-sm); padding: 0 var(--space-xs); }
     .pill { padding: 0.5rem 0.875rem; border-radius: var(--radius-full); background: var(--color-surface-offset); border: 1px solid var(--color-divider); }
 
     .result-grid { margin-top: var(--space-lg); display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-md); padding: 0 var(--space-xs); }
 
-    /* 🎉 배경원 완전 제거 */
     .trip-card { 
       padding: var(--space-md); min-height: clamp(140px, 22vh, 160px); 
       display: grid; gap: var(--space-sm); border-radius: 1.125rem; 
       background: linear-gradient(180deg, var(--color-surface), var(--color-surface-2)); 
       border: 1px solid var(--color-border); margin: 0;
-      position: relative; overflow: hidden;
     }
-    /* ::before 완전 삭제 */
 
     .trip-top { display: flex; justify-content: space-between; gap: var(--space-xs); align-items: flex-start; }
     .trip-date { display: inline-flex; padding: 0.4rem 0.625rem; border-radius: var(--radius-full); background: var(--color-primary-highlight); color: var(--color-primary); font-size: var(--text-xs); letter-spacing: .06em; text-transform: uppercase; }
@@ -94,13 +106,21 @@
 
     .empty { grid-column: 1/-1; padding: var(--space-xl); border: 1px dashed var(--color-border); border-radius: 1.25rem; text-align: center; color: var(--color-text-muted); background: var(--color-surface-offset); }
 
-    @media (max-width: 640px) {
-      .filter-grid { grid-template-columns: 1fr !important; grid-template-rows: auto auto auto !important; gap: var(--space-sm) !important; }
-      .page-shell { padding: var(--space-md) 0 var(--space-lg); }
+    /* 🎯 모바일에서도 1줄 유지 (iPhone 15 기준 완벽) */
+    @media (max-width: 480px) {
+      .filter-grid { 
+        grid-template-columns: 1.2fr 1.2fr 1fr !important; /* 모바일도 1줄 */
+        gap: var(--space-xs) !important; /* 간격 좁힘 */
+      }
+      .filter-grid input, .filter-grid select { 
+        height: 40px; padding: 0.5rem 1.75rem 0.5rem 0.75rem; /* 컴팩트 */
+        font-size: clamp(0.8rem, 3vw, 0.875rem);
+      }
+      .field label { font-size: 0.7rem; margin-bottom: 0.25rem; }
+      .page-shell { padding: var(--space-sm) 0 var(--space-md); }
+      .result-grid { grid-template-columns: 1fr; gap: var(--space-sm); }
     }
-    @media (max-width: 480px) { .result-grid { grid-template-columns: 1fr; gap: var(--space-sm); } }
     
-    /* 🎉 테마 토글 완전 차단 */
     [data-theme-toggle], .theme-toggle { display: none !important; }
   </style>
 </head>
@@ -129,7 +149,6 @@
       <div class="result-grid" id="results"></div>
     </section>
   </div>
-
   <script>
     const countryMap = { aus:'Australia', jpn:'Japan', kor:'Korea', usa:'USA', fra:'France', ita:'Italy', esp:'Spain', gbr:'United Kingdom' };
     const cityFilter = document.getElementById('cityFilter');
