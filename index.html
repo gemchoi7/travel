@@ -331,12 +331,14 @@
           .filter(Boolean)
           .filter(t => t.length < 40);
         const allCities = uniq(sectionCities);
-        const country = base.codes.map(c => countryMap[c] || c.toUpperCase()).join(' · ');
+        const countries = base.codes.map(c => countryMap[c] || c.toUpperCase());
+        const country = countries.join(' · ');
         
         return {
           ...base,
           title,
           country,
+          countries, 
           cities: allCities,
           ymLabel: base.year && base.month ? `${base.year}.${base.month}` : 'Unknown',
           note: allCities.length ? `${allCities.length}개 도시` : '도시 정보 없음',
@@ -392,7 +394,7 @@
     }
 
     function uniqueCountries(source) {
-      return uniq(source.map(item => item.country)).sort((a, b) => a.localeCompare(b));
+      return uniq(source.flatMap(item => item.countries)).sort((a, b) => a.localeCompare(b));
     }
 
     function uniqueCities(source) {
@@ -422,7 +424,7 @@
       const city = cityFilter.value.trim().toLowerCase();
       const keyword = searchInput.value.trim();
       return fileData.filter(item => {
-        const hitCountry = !country || item.country.toLowerCase() === country;
+        const hitCountry = !country || item.countries.some(c => c.toLowerCase() === country);
         const hitCity = !city || item.cities.some(name => name.toLowerCase() === city);
         const haystack = [item.file, item.country, item.title, item.note, item.ymLabel, ...item.cities].join(' ').toLowerCase();
         const hitKeyword = !keyword || keyword.split(/\s+/).every(k => haystack.includes(k.toLowerCase()));
