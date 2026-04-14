@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🇹🇷 터키·그리스 여행 일정</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #f2f2f4;
+    color: #1a1a1a;
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+
+/* ── Hero ── */
+.hero {
+background: linear-gradient(160deg, #082840 0%, #0f4c75 55%, #1b7aad 100%);
+padding: 52px 24px 40px;
+color: #fff;
+position: relative;
+overflow: hidden;
+}
+.hero::before {
+content:’’;
+position:absolute; top:-60px; right:-60px;
+width:220px; height:220px; border-radius:50%;
+background:rgba(255,255,255,.04);
+}
+.hero::after {
+content:’’;
+position:absolute; bottom:-1px; left:0; right:0;
+height:26px; background:#f2f2f4;
+border-radius:26px 26px 0 0;
+}
+.hero-flag  { font-size:40px; margin-bottom:10px; }
+.hero-title { font-size:28px; font-weight:900; letter-spacing:-.5px; }
+.hero-sub   { font-size:13px; color:rgba(255,255,255,.65); margin-top:5px; }
+.hero-cities{ display:flex; gap:10px; margin-top:22px; flex-wrap:wrap; }
+.city-badge {
+background:rgba(255,255,255,.13);
+border:1px solid rgba(255,255,255,.22);
+border-radius:20px; padding:6px 15px;
+font-size:13px; font-weight:600;
+}
+
+/* ── Sticky section header ── */
+.section-header {
+background:#fff; padding:14px 18px 12px;
+display:flex; align-items:center; justify-content:space-between;
+position:sticky; top:0; z-index:20;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+border-bottom:1px solid #ebebeb;
+}
+.section-left{ display:flex; align-items:center; gap:8px; }
+.section-emoji{ font-size:17px; }
+.section-city { font-size:17px; font-weight:900; letter-spacing:-.4px; }
+.section-period{
+font-size:11px; color:#999; font-weight:600;
+background:#f5f5f7; padding:3px 9px; border-radius:20px;
+}
+.section-hotel{
+font-size:11px; color:#1a7fbf; background:#e5f3fb;
+padding:4px 10px; border-radius:20px; font-weight:700;
+cursor: pointer;
+text-decoration: none;
+display: inline-block;
+transition: background 0.18s, color 0.18s, transform 0.12s;
+}
+.section-hotel:hover {
+background: #1a7fbf;
+color: #fff;
+transform: scale(1.04);
+}
+.section-hotel.pending {
+color:#999; background:#f0f0f0; cursor:default;
+}
+.section-hotel.pending:hover {
+background:#f0f0f0; color:#999; transform:none;
+}
+
+/* ── Day block ── */
+.day-block{ background:#fff; margin-bottom:8px; }
+.day-header{
+padding:16px 18px 12px;
+display:flex; align-items:center; justify-content:space-between;
+border-bottom:1px solid #f5f5f7;
+}
+.day-left{ display:flex; align-items:baseline; gap:10px; }
+.day-num  { font-size:16px; font-weight:900; color:#111; }
+.day-date { font-size:13px; color:#777; font-weight:500; }
+.day-theme{
+font-size:12px; color:#1a7fbf; font-weight:700;
+background:#e5f3fb; padding:3px 10px; border-radius:20px;
+white-space:nowrap;
+}
+
+/* ── Timeline ── */
+.timeline{ padding:6px 18px 2px; }
+.tl-item{
+display:flex; gap:14px;
+padding:10px 0; position:relative;
+}
+.tl-item:not(:last-child)::after{
+content:’’; position:absolute;
+left:5px; top:26px; bottom:-10px;
+width:1.5px; background:#e5e5e5;
+}
+.tl-dot{
+width:11px; height:11px; border-radius:50%;
+background:#c8c8c8; flex-shrink:0; margin-top:5px;
+}
+.tl-dot.blue  { background:#1a7fbf; box-shadow:0 0 0 3px rgba(26,127,191,.18); }
+.tl-dot.orange{ background:#e07b39; box-shadow:0 0 0 3px rgba(224,123,57,.18); }
+.tl-dot.yellow{ background:#d4a017; box-shadow:0 0 0 3px rgba(212,160,23,.18); }
+.tl-pin{
+font-size:15px; flex-shrink:0;
+margin-top:1px; line-height:1;
+width:16px; text-align:center;
+}
+.tl-content{ flex:1; }
+.tl-label{ font-size:14px; font-weight:700; color:#111; line-height:1.45; }
+.tl-label.main{ font-size:15px; font-weight:800; color:#0a2e52; }
+.tl-desc{ font-size:12px; color:#999; line-height:1.55; margin-top:2px; }
+.tl-time{ font-size:11px; color:#bbb; font-weight:700; margin-right:5px; }
+.tl-tags{ display:flex; gap:5px; flex-wrap:wrap; margin-top:5px; }
+.tag{
+display:inline-block; font-size:11px; font-weight:700;
+padding:2px 8px; border-radius:10px;
+}
+.tag-orange{ color:#c4611a; background:#fef0e4; }
+.tag-blue  { color:#1a7fbf; background:#e5f3fb; }
+.tag-green { color:#1e8c5e; background:#e2f5ec; }
+.tag-red   { color:#c0392b; background:#fde8e6; }
+.tag-yellow{ color:#8a6800; background:#fff8e0; }
+
+/* ── Hotel candidates ── */
+.hotel-candidates{
+padding:6px 18px 14px;
+display:flex; flex-direction:column; gap:5px;
+}
+.hotel-cand{
+display:flex; align-items:center; justify-content:space-between;
+font-size:12px; color:#555; padding:5px 10px;
+background:#f8f8f9; border-radius:10px;
+}
+.hotel-cand .star{ color:#e07b39; font-size:11px; }
+
+/* ── Photo strip ── */
+.photo-strip{
+display:flex; gap:8px;
+padding:8px 18px 14px;
+overflow-x:auto; scrollbar-width:none;
+}
+.photo-strip::-webkit-scrollbar{ display:none; }
+.photo-card{
+flex-shrink:0; width:140px; height:95px;
+border-radius:12px; overflow:hidden;
+background:#dde0e5; position:relative;
+}
+.photo-card img{
+width:100%; height:100%; object-fit:cover; display:block;
+transition:transform .3s ease;
+}
+.photo-card:hover img{ transform:scale(1.04); }
+.photo-label{
+position:absolute; bottom:0; left:0; right:0;
+background:linear-gradient(transparent,rgba(0,0,0,.58));
+color:#fff; font-size:10px; font-weight:700;
+padding:16px 8px 6px;
+}
+
+.bottom-spacer{ height:36px; }
+</style>
+
+</head>
+<body>
+
+<script>
+function imgErr(el, fallback) {
+  if (fallback) {
+    el.onerror = function(){ el.closest('.photo-card').style.display='none'; };
+    el.src = fallback;
+  } else {
+    el.closest('.photo-card').style.display = 'none';
+  }
+}
+function openMap(url) {
+  window.location.href = url;
+}
+</script>
+
+<!-- Hero -->
+
+<div class="hero">
+  <div class="hero-flag">🇹🇷🇬🇷</div>
+  <div class="hero-title">터키·그리스 여행 일정표</div>
+  <div class="hero-sub">5/23(토) — 6/6(토) · 14박 15일</div>
+  <div class="hero-cities">
+    <div class="city-badge">🏔 카파도키아 2박</div>
+    <div class="city-badge">🕌 이스탄불 3박</div>
+    <div class="city-badge">🏖 크레타 2박</div>
+    <div class="city-badge">🌊 밀로스 3박</div>
+    <div class="city-badge">🏛 아테네 2박</div>
+    <div class="city-badge">🛍 이스탄불 1박</div>
+  </div>
+</div>
+
+<!-- ═══════ 카파도키아 ═══════ -->
+
+<div class="section-header">
+  <div class="section-left">
+    <span class="section-emoji">🏔</span>
+    <span class="section-city">카파도키아</span>
+    <span class="section-period">5/23 – 5/25</span>
+  </div>
+  <a class="section-hotel"
+     onclick="openMap('https://maps.app.goo.gl/Dhog6RMrTX8weR1V6')">
+    🏨 Kayra Cave Suites 📍
+  </a>
+</div>
+
+<!-- Day 1 -->
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">1일차</span>
+      <span class="day-date">5/23(토)</span>
+    </div>
+    <span class="day-theme">✈️ 출발 & 도착</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label"><span class="tl-time">10:25</span>인천 → 이스탄불 (OZ551, 11h45m)</div>
+        <div class="tl-desc">아시아나 · G마켓 예약</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label"><span class="tl-time">16:10</span>이스탄불 도착</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label"><span class="tl-time">19:00</span>이스탄불 → 네브세히르 (TK2008, 1h20m)</div>
+        <div class="tl-desc">터키항공</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label"><span class="tl-time">20:20</span>네브세히르 도착</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot orange"></div>
+      <div class="tl-content">
+        <div class="tl-label"><span class="tl-time">21:00</span>공항 ↔ 호텔 셔틀</div>
+        <div class="tl-desc">아고다(유빈) 예약 완료</div>
+      </div>
+    </div>
+  </div>
+  <div class="photo-strip">
+    <div class="photo-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Cappadocia_Balloon_Inflating.jpg/400px-Cappadocia_Balloon_Inflating.jpg"
+           onerror="imgErr(this,'https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Goreme_2.jpg/400px-Goreme_2.jpg')"
+           alt="카파도키아 열기구">
+      <div class="photo-label">카파도키아 열기구</div>
+    </div>
+    <div class="photo-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Cappadocia_Tuff_Cones_srgb.jpg/400px-Cappadocia_Tuff_Cones_srgb.jpg"
+           onerror="imgErr(this,null)"
+           alt="괴레메 기암군">
+      <div class="photo-label">괴레메 기암군</div>
+    </div>
+  </div>
+</div>
+
+<!-- Day 2 -->
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">2일차</span>
+      <span class="day-date">5/24(일)</span>
+    </div>
+    <span class="day-theme">🎈 현지 투어</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">현지 투어 신청</div>
+        <div class="tl-desc">열기구 투어 및 카파도키아 일대 관광</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Day 3 -->
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">3일차</span>
+      <span class="day-date">5/25(월)</span>
+    </div>
+    <span class="day-theme">🕌 이스탄불 이동</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">오전 투어</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot orange"></div>
+      <div class="tl-content">
+        <div class="tl-label"><span class="tl-time">18:00</span>공항 ↔ 호텔 셔틀</div>
+        <div class="tl-desc">아고다(유빈) 예약 완료</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label"><span class="tl-time">21:05</span>네브세히르 → 이스탄불 (TK2009, 1h30m)</div>
+        <div class="tl-desc">터키항공</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label"><span class="tl-time">22:35</span>이스탄불 도착</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ 이스탄불 1차 ═══════ -->
+
+<div class="section-header">
+  <div class="section-left">
+    <span class="section-emoji">🕌</span>
+    <span class="section-city">이스탄불</span>
+    <span class="section-period">5/25 – 5/28</span>
+  </div>
+  <a class="section-hotel"
+     onclick="openMap('https://maps.app.goo.gl/JSaKmM4YVWhq5Xhg8')">
+    🏨 Hotel Erboy 📍
+  </a>
+</div>
+
+<!-- Day 4 -->
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">4일차</span>
+      <span class="day-date">5/26(화)</span>
+    </div>
+    <span class="day-theme">🗺 투어 & 🥩 누스렛</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">이스탄불 시내 투어</div>
+        <div class="tl-desc">그랜드 바자르 · 블루 모스크 · 아야 소피아</div>
+        <div class="tl-tags">
+          <span class="tag tag-blue" style="cursor:pointer" onclick="openMap('https://experiences.myrealtrip.com/products/3436279')">🗺 마이리얼트립 예약</span>
+        </div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main"><span class="tl-time">18:00</span>누스렛 스테이크하우스 (탁심광장)</div>
+        <div class="tl-desc">예약 완료 · Salt Bae의 세계적인 스테이크 레스토랑</div>
+        <div class="tl-tags">
+          <span class="tag tag-green">🥩 저녁 예약</span>
+          <span class="tag tag-blue" style="cursor:pointer" onclick="openMap('https://maps.app.goo.gl/KQSLPHfP5vKanjrf9')">📍 지도</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="photo-strip">
+    <div class="photo-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Hagia_Sophia_interior,_Istanbul,_Turkey,_2015-07-08_(4).JPG/400px-Hagia_Sophia_interior,_Istanbul,_Turkey,_2015-07-08_(4).JPG"
+           onerror="imgErr(this,'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Hagia_sophia_all.jpg/400px-Hagia_sophia_all.jpg')"
+           alt="아야 소피아">
+      <div class="photo-label">아야 소피아</div>
+    </div>
+    <div class="photo-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Sultanahmet_Camii_01.JPG/400px-Sultanahmet_Camii_01.JPG"
+           onerror="imgErr(this,null)"
+           alt="블루 모스크">
+      <div class="photo-label">블루 모스크</div>
+    </div>
+  </div>
+</div>
+
+<!-- Day 5 -->
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">5일차</span>
+      <span class="day-date">5/27(수)</span>
+    </div>
+    <span class="day-theme">🌉 이스탄불 관광</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">이스탄불 자유 일정</div>
+        <div class="tl-desc">보스포루스 해협 크루즈 · 탁심 광장 · 카팔르차르샤</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ 크레타 ═══════ -->
+
+<div class="section-header">
+  <div class="section-left">
+    <span class="section-emoji">🏖</span>
+    <span class="section-city">크레타</span>
+    <span class="section-period">5/28 – 5/30</span>
+  </div>
+  <a class="section-hotel"
+     onclick="openMap('https://maps.app.goo.gl/uCnsTuEu9jB2kyq5A')">
+    🏨 Royal Sun 📍
+  </a>
+</div>
+
+<!-- Day 6 -->
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">6일차</span>
+      <span class="day-date">5/28(목)</span>
+    </div>
+    <span class="day-theme">✈️ 크레타 이동</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label"><span class="tl-time">16:25</span>이스탄불 → 크레타 HER (A3435, 1h30m)</div>
+        <div class="tl-desc">에게항공</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label"><span class="tl-time">17:55</span>크레타 도착</div>
+      </div>
+    </div>
+  </div>
+  <div class="photo-strip">
+    <div class="photo-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Balos_Lagoon.jpg/400px-Balos_Lagoon.jpg"
+           onerror="imgErr(this,null)"
+           alt="발로스 라군">
+      <div class="photo-label">발로스 라군</div>
+    </div>
+    <div class="photo-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Elafonisi_beach.jpg/400px-Elafonisi_beach.jpg"
+           onerror="imgErr(this,null)"
+           alt="엘라포니시 해변">
+      <div class="photo-label">엘라포니시 해변</div>
+    </div>
+  </div>
+</div>
+
+<!-- Day 7 -->
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">7일차</span>
+      <span class="day-date">5/29(금)</span>
+    </div>
+    <span class="day-theme">🏖 크레타 관광</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">크레타 자유 일정</div>
+        <div class="tl-desc">하니아 올드타운 · 베네치아 항구 · 지역 해변 탐방</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ 밀로스 ═══════ -->
+
+<div class="section-header">
+  <div class="section-left">
+    <span class="section-emoji">🌊</span>
+    <span class="section-city">밀로스</span>
+    <span class="section-period">5/30 – 6/2</span>
+  </div>
+  <a class="section-hotel"
+     onclick="openMap('https://maps.app.goo.gl/VAMGvncXvA2Rvnk49')">
+    🏨 Venus de Milo 📍
+  </a>
+</div>
+
+<!-- Day 8 -->
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">8일차</span>
+      <span class="day-date">5/30(토)</span>
+    </div>
+    <span class="day-theme">⛴ 페리 이동</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label"><span class="tl-time">21:00</span>크레타 하니아 → 밀로스 (페리, 4h20m)</div>
+        <div class="tl-desc">ANEK Lines</div>
+        <div class="tl-tags"><span class="tag tag-blue">⛴ 야간 페리</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Day 9 -->
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">9일차</span>
+      <span class="day-date">5/31(일)</span>
+    </div>
+    <span class="day-theme">🌅 밀로스 도착</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label"><span class="tl-time">01:20</span>밀로스 도착</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">밀로스 자유 일정</div>
+        <div class="tl-desc">사라키니코 해변 · 트리피티 절벽 · 피리클리아 해변</div>
+      </div>
+    </div>
+  </div>
+  <div class="photo-strip">
+    <div class="photo-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Sarakiniko_Milos.jpg/400px-Sarakiniko_Milos.jpg"
+           onerror="imgErr(this,null)"
+           alt="사라키니코 해변">
+      <div class="photo-label">사라키니코 해변</div>
+    </div>
+    <div class="photo-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Klima_Milos.jpg/400px-Klima_Milos.jpg"
+           onerror="imgErr(this,null)"
+           alt="클리마 어촌">
+      <div class="photo-label">클리마 어촌</div>
+    </div>
+  </div>
+</div>
+
+<!-- Day 10 -->
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">10일차</span>
+      <span class="day-date">6/1(월)</span>
+    </div>
+    <span class="day-theme">⛵ 요트 투어</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">밀로스–폴리에고스 전일 세일보트 투어</div>
+        <div class="tl-desc">아다만타스 출발 · 폴리에고스 섬 · 에메랄드 바다 수영 · 점심 포함</div>
+        <div class="tl-tags">
+          <span class="tag tag-blue">⛵ 요트 전일</span>
+          <span class="tag tag-green">🍽 점심 포함</span>
+          <span class="tag tag-orange" style="cursor:pointer" onclick="openMap('https://www.getyourguide.com/adamantas-l114062/adamas-milos-polyaigos-full-day-sailboat-tour-with-lunch-t406661/')">🔗 예약 링크</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ 아테네 ═══════ -->
+
+<div class="section-header">
+  <div class="section-left">
+    <span class="section-emoji">🏛</span>
+    <span class="section-city">아테네</span>
+    <span class="section-period">6/2 – 6/4</span>
+  </div>
+  <a class="section-hotel"
+     onclick="openMap('https://www.airbnb.co.kr/rooms/1567262192821657270')">
+    🏨 에어비앤비 숙소 📍
+  </a>
+</div>
+
+<!-- Day 11 -->
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">11일차</span>
+      <span class="day-date">6/2(화)</span>
+    </div>
+    <span class="day-theme">✈️ 아테네 이동</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label"><span class="tl-time">13:25</span>밀로스 → 아테네 (GQ411, 40m)</div>
+        <div class="tl-desc">스카이익스프레스 · 트립닷컴 예약</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label"><span class="tl-time">14:05</span>아테네 도착</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot orange"></div>
+      <div class="tl-content">
+        <div class="tl-label">숙소 체크인</div>
+        <div class="tl-desc">에어비앤비 · 예약 완료</div>
+        <div class="tl-tags"><span class="tag tag-green">✅ 예약 완료</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="photo-strip">
+    <div class="photo-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/The_Parthenon_in_Athens.jpg/400px-The_Parthenon_in_Athens.jpg"
+           onerror="imgErr(this,null)"
+           alt="파르테논 신전">
+      <div class="photo-label">파르테논 신전</div>
+    </div>
+  </div>
+</div>
+
+<!-- Day 12 -->
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">12일차</span>
+      <span class="day-date">6/3(수)</span>
+    </div>
+    <span class="day-theme">🏛 아테네 관광</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">아크로폴리스 & 파르테논 신전</div>
+        <div class="tl-desc">그리스 문명의 정수 — 아크로폴리스 박물관 포함</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">플라카 지구 & 모나스티라키</div>
+        <div class="tl-desc">아테네 올드타운 골목 탐방 & 벼룩시장</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ 이스탄불 2차 ═══════ -->
+
+<div class="section-header">
+  <div class="section-left">
+    <span class="section-emoji">🛍</span>
+    <span class="section-city">이스탄불</span>
+    <span class="section-period">6/4 – 6/5</span>
+  </div>
+  <a class="section-hotel"
+     onclick="openMap('https://maps.app.goo.gl/7ZMsXWTjsJRdjneS6')">
+    🏨 Nippon Hotel 📍
+  </a>
+</div>
+
+<!-- Day 13 -->
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">13일차</span>
+      <span class="day-date">6/4(목)</span>
+    </div>
+    <span class="day-theme">✈️ 이스탄불 이동</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label"><span class="tl-time">15:40</span>아테네 → 이스탄불 (TK1850, 1h40m)</div>
+        <div class="tl-desc">터키항공</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label"><span class="tl-time">17:20</span>이스탄불 도착</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Day 14 -->
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">14일차</span>
+      <span class="day-date">6/5(금)</span>
+    </div>
+    <span class="day-theme">🛍 쇼핑 & 귀국</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">쇼핑데이</div>
+        <div class="tl-desc">그랜드 바자르 · 이스티클랄 거리 쇼핑</div>
+        <div class="tl-tags"><span class="tag tag-orange">🛍 쇼핑</span></div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label"><span class="tl-time">17:30</span>이스탄불 → 인천 (OZ552, 9h50m)</div>
+        <div class="tl-desc">아시아나</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Day 15 -->
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">15일차</span>
+      <span class="day-date">6/6(토)</span>
+    </div>
+    <span class="day-theme">🇰🇷 귀국</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label"><span class="tl-time">09:20</span>인천 도착</div>
+        <div class="tl-desc">즐거운 여행을 마치고 귀국 🇰🇷</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bottom-spacer"></div>
+</body>
+</html>
