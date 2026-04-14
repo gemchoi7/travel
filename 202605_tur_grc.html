@@ -46,6 +46,7 @@ background:rgba(255,255,255,.13);
 border:1px solid rgba(255,255,255,.22);
 border-radius:20px; padding:6px 15px;
 font-size:13px; font-weight:600;
+cursor: pointer;
 }
 
 /* ── Sticky section header ── */
@@ -205,6 +206,9 @@ function showPlaceholder(el) {
 function openMap(url) {
   window.location.href = url;
 }
+function scrollTo(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
 </script>
 
 <!-- Hero -->
@@ -214,18 +218,18 @@ function openMap(url) {
   <div class="hero-title">터키·그리스 여행 일정표</div>
   <div class="hero-sub">5/23(토) — 6/6(토) · 14박 15일</div>
   <div class="hero-cities">
-    <div class="city-badge">🏔 카파도키아 2박</div>
-    <div class="city-badge">🕌 이스탄불 3박</div>
-    <div class="city-badge">🏖 크레타 2박</div>
-    <div class="city-badge">🌊 밀로스 3박</div>
-    <div class="city-badge">🏛 아테네 2박</div>
-    <div class="city-badge">🛍 이스탄불 1박</div>
+    <div class="city-badge" onclick="scrollTo('sec-카파도키아')">🏔 카파도키아 2박</div>
+    <div class="city-badge" onclick="scrollTo('sec-이스탄불1')">🕌 이스탄불 3박</div>
+    <div class="city-badge" onclick="scrollTo('sec-크레타')">🏖 크레타 2박</div>
+    <div class="city-badge" onclick="scrollTo('sec-밀로스')">🌊 밀로스 3박</div>
+    <div class="city-badge" onclick="scrollTo('sec-아테네')">🏛 아테네 2박</div>
+    <div class="city-badge" onclick="scrollTo('sec-이스탄불2')">🛍 이스탄불 1박</div>
   </div>
 </div>
 
 <!-- ═══════ 카파도키아 ═══════ -->
 
-<div class="section-header">
+<div class="section-header" id="sec-카파도키아">
   <div class="section-left">
     <span class="section-emoji">🏔</span>
     <span class="section-city">카파도키아</span>
@@ -361,7 +365,7 @@ function openMap(url) {
 
 <!-- ═══════ 이스탄불 1차 ═══════ -->
 
-<div class="section-header">
+<div class="section-header" id="sec-이스탄불1">
   <div class="section-left">
     <span class="section-emoji">🕌</span>
     <span class="section-city">이스탄불</span>
@@ -445,7 +449,7 @@ function openMap(url) {
 
 <!-- ═══════ 크레타 ═══════ -->
 
-<div class="section-header">
+<div class="section-header" id="sec-크레타">
   <div class="section-left">
     <span class="section-emoji">🏖</span>
     <span class="section-city">크레타</span>
@@ -521,7 +525,7 @@ function openMap(url) {
 
 <!-- ═══════ 밀로스 ═══════ -->
 
-<div class="section-header">
+<div class="section-header" id="sec-밀로스">
   <div class="section-left">
     <span class="section-emoji">🌊</span>
     <span class="section-city">밀로스</span>
@@ -624,7 +628,7 @@ function openMap(url) {
 
 <!-- ═══════ 아테네 ═══════ -->
 
-<div class="section-header">
+<div class="section-header" id="sec-아테네">
   <div class="section-left">
     <span class="section-emoji">🏛</span>
     <span class="section-city">아테네</span>
@@ -701,7 +705,7 @@ function openMap(url) {
 
 <!-- ═══════ 이스탄불 2차 ═══════ -->
 
-<div class="section-header">
+<div class="section-header" id="sec-이스탄불2">
   <div class="section-left">
     <span class="section-emoji">🛍</span>
     <span class="section-city">이스탄불</span>
