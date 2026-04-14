@@ -183,11 +183,24 @@ padding:16px 8px 6px;
 <script>
 function imgErr(el, fallback) {
   if (fallback) {
-    el.onerror = function(){ el.closest('.photo-card').style.display='none'; };
+    el.onerror = function(){ showPlaceholder(el); };
     el.src = fallback;
   } else {
-    el.closest('.photo-card').style.display = 'none';
+    showPlaceholder(el);
   }
+}
+
+function showPlaceholder(el) {
+  const card = el.closest('.photo-card');
+  el.style.display = 'none';
+  card.style.background = '#e8e8ea';
+  card.style.display = 'flex';
+  card.style.alignItems = 'center';
+  card.style.justifyContent = 'center';
+  const icon = document.createElement('span');
+  icon.textContent = '🖼';
+  icon.style.cssText = 'font-size:24px;opacity:0.4;';
+  card.insertBefore(icon, card.querySelector('.photo-label'));
 }
 function openMap(url) {
   window.location.href = url;
