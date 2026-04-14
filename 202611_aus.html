@@ -66,7 +66,17 @@ background:#f5f5f7; padding:3px 9px; border-radius:20px;
 .section-hotel{
 font-size:11px; color:#1a7fbf; background:#e5f3fb;
 padding:4px 10px; border-radius:20px; font-weight:700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.18s, color 0.18s, transform 0.12s;
 }
+.section-hotel:hover {
+  background: #1a7fbf;
+  color: #fff;
+  transform: scale(1.04);
+}
+
 
 /* ── Day block ── */
 .day-block{ background:#fff; margin-bottom:8px; }
@@ -163,6 +173,11 @@ function imgErr(el, fallback) {
     el.closest('.photo-card').style.display = 'none';
   }
 }
+
+function openMap(url) {
+  window.open(url, '_blank');
+}
+
 </script>
 
 <!-- Hero -->
@@ -185,7 +200,9 @@ function imgErr(el, fallback) {
     <span class="section-city">멜버른</span>
     <span class="section-period">11/28 – 12/02</span>
   </div>
-  <span class="section-hotel">[🏨숙소] 콜린스 하우스</span>
+  <a class="section-hotel" onclick="openMap('https://maps.app.goo.gl/eBUetbqrJY61Mfj79?g_st=ic')">
+  🏨 콜린스 하우스 (위치)
+  </a>
 </div>
 
 <!-- Day 1 -->
@@ -380,7 +397,9 @@ function imgErr(el, fallback) {
     <span class="section-city">시드니</span>
     <span class="section-period">12/02 – 12/06</span>
   </div>
-  <span class="section-hotel">[🏨숙소] 메리톤 월드타워</span>
+  <a class="section-hotel" onclick="openMap('https://maps.app.goo.gl/kyK6fKcCLY9kZJ9N7?g_st=ic')">
+  🏨 메리톤 월드타워 (위치)
+  </a>
 </div>
 
 <!-- Day 5 -->
