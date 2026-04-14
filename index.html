@@ -308,9 +308,17 @@
     function uniq(arr) { return [...new Set(arr.filter(Boolean))]; }
 
     function parseFilename(file) {
-      const match = file.match(/^(\d{4})(\d{2})_([a-z0-9-_]+)\.html$/i);
-      return { file, year: match ? match[1] : '', month: match ? match[2] : '', code: match ? match[3].toLowerCase() : '' };
+      const match = file.match(/^(\d{4})(\d{2})_([a-z0-9_-]+)\.html$/i);
+      const codes = match ? match[3].toLowerCase().split('_') : [];
+      return {
+        file,
+        year: match ? match[1] : '',
+        month: match ? match[2] : '',
+        code: match ? match[3].toLowerCase() : '',
+        codes  // ['tur', 'grc']
+      };
     }
+
 
     function parseDocumentMeta(file, htmlText) {
       try {
@@ -322,7 +330,10 @@
           .filter(Boolean)
           .filter(t => t.length < 40);
         const allCities = uniq(sectionCities);
-        const country = countryMap[base.code] || base.code.toUpperCase();
+        const country = base.codes.length
+          ? base.codes.map(c => countryMap[c] || c.toUpperCase()).join(' · ')
+          : base.code.toUpperCase();
+
         return {
           ...base,
           title,
