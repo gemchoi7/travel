@@ -177,7 +177,7 @@ function imgErr(el, fallback) {
 function openMap(url) {
   window.location.href = url;
 }
-function scrollTo(id) {
+function scrollToSection(id) {
   document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
 }
 </script>
@@ -189,8 +189,8 @@ function scrollTo(id) {
   <div class="hero-title">호주 여행 일정표</div>
   <div class="hero-sub">11/28(토) — 12/06(일) · 9박 10일</div>
   <div class="hero-cities">
-    <div class="city-badge" onclick="scrollTo('sec-멜버른')">🏙 멜버른 4박</div>
-    <div class="city-badge" onclick="scrollTo('sec-시드니')">🌊 시드니 5박</div>
+    <div class="city-badge" onclick="scrollToSection('sec-멜버른')">🏙 멜버른 4박</div>
+    <div class="city-badge" onclick="scrollToSection('sec-시드니')">🌊 시드니 5박</div>
   </div>
 </div>
 
