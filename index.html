@@ -330,10 +330,8 @@
           .filter(Boolean)
           .filter(t => t.length < 40);
         const allCities = uniq(sectionCities);
-        const country = base.codes.length
-          ? base.codes.map(c => countryMap[c] || c.toUpperCase()).join(' · ')
-          : base.code.toUpperCase();
-
+        const country = base.codes.map(c => countryMap[c] || c.toUpperCase()).join(' · ');
+        
         return {
           ...base,
           title,
@@ -453,7 +451,7 @@
               <span class="trip-date">${item.ymLabel}</span>
               <h3 class="trip-country">${item.country}</h3>
               <p class="trip-cities">
-                ${item.cities.length ? (item.cities.length <= 2 ? item.cities.join(' · ') : `${item.cities[0]} 외 ${item.cities.length-1}개`) : '도시 정보 없음'}
+                ${item.cities.length ? item.cities.join(' · ') : '도시 정보 없음'}
               </p>
             </div>
           </div>
