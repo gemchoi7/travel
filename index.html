@@ -388,7 +388,7 @@
           });
         }
       }
-      fileData = loaded.sort((a, b) => (b.year + b.month).localeCompare(a.year + a.month));
+      fileData = loaded.sort((b, a) => (b.year + b.month).localeCompare(a.year + a.month));
       initializeFilters();
       renderResults();
     }
