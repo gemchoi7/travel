@@ -189,11 +189,12 @@ function scrollToSection(id) { document.getElementById(id).scrollIntoView({ beha
     <div class="city-badge" onclick="scrollToSection('sec-glasgow1')">🌆 글래스고</div>
     <div class="city-badge" onclick="scrollToSection('sec-campbeltown')">🥃 Campbeltown</div>
     <div class="city-badge" onclick="scrollToSection('sec-islay')">🌊 Islay</div>
+    <div class="city-badge" onclick="scrollToSection('sec-glencoe')">🏔 Glencoe</div>
     <div class="city-badge" onclick="scrollToSection('sec-skye')">⛰ 스카이섬</div>
     <div class="city-badge" onclick="scrollToSection('sec-dufftown')">🥃 Dufftown</div>
     <div class="city-badge" onclick="scrollToSection('sec-edinburgh')">🏰 에든버러</div>
   </div>
-  <div class="hero-note">✈️ 항공 확정 (KE907 · OZ522 16:45 런던 출발) · ⭐ 스프링뱅크 8/25 10:00, 브룩라디 8/27 예약 필요 · 나머지 호텔/교통은 미예약 초안입니다.</div>
+  <div class="hero-note">✈️ 항공 확정 (KE907 · OZ522 16:45 런던 출발) · ⭐ 스프링뱅크 8/25 10:00, 브룩라디 8/27 투어 모두 예약 확정 · 나머지 호텔/교통은 미예약 초안입니다.</div>
 </div>
 
 <div class="section-header" id="sec-london1">
@@ -435,7 +436,6 @@ function scrollToSection(id) { document.getElementById(id).scrollIntoView({ beha
   </div>
   <div class="timeline">
     <div class="tl-item">
-      <div class="tl-pin">📍</div>
       <div class="tl-content">
         <div class="tl-label main"><span class="tl-time">10:00</span>스프링뱅크 증류소 투어</div>
         <div class="tl-desc">전 공정을 자체 수행하는 캠벨타운의 마지막 전통 증류소 · 예약 확정</div>
@@ -537,11 +537,11 @@ function scrollToSection(id) { document.getElementById(id).scrollIntoView({ beha
   </div>
 </div>
 
-<div class="section-header" id="sec-skye">
+<div class="section-header" id="sec-glencoe">
   <div class="section-left">
-    <span class="section-emoji">⛰</span>
-    <span class="section-city">스카이섬 · 포트리</span>
-    <span class="section-period">8/28 – 8/30</span>
+    <span class="section-emoji">🏔</span>
+    <span class="section-city">Glencoe</span>
+    <span class="section-period">8/28</span>
   </div>
   <span class="section-hotel tbd">🏨 호텔 미정</span>
 </div>
@@ -552,7 +552,7 @@ function scrollToSection(id) { document.getElementById(id).scrollIntoView({ beha
       <span class="day-num">10일차</span>
       <span class="day-date">8/28(금)</span>
     </div>
-    <span class="day-theme">✈️ 스카이섬 이동</span>
+    <span class="day-theme">🏔 글렌코 이동 & 트레킹</span>
   </div>
   <div class="timeline">
     <div class="tl-item">
@@ -566,16 +566,17 @@ function scrollToSection(id) { document.getElementById(id).scrollIntoView({ beha
     <div class="tl-item">
       <div class="tl-dot gray"></div>
       <div class="tl-content">
-        <div class="tl-label">렌터카 픽업 후 바로 스카이섬(포트리)행</div>
-        <div class="tl-desc">렌터카 약 5시간 · 글렌코 경유 포토 스톱 · 아일린 도난 성 경유</div>
+        <div class="tl-label">렌터카 픽업 후 Glencoe 이동</div>
+        <div class="tl-desc">A82 경유 약 2시간(로몬드호 지나는 경치 좋은 구간) · 09:45 글래스고 도착 기준 12:30경 도착 예상</div>
         <div class="tl-tags"><span class="tag tag-gold">🔜 미예약</span></div>
       </div>
     </div>
     <div class="tl-item">
       <div class="tl-pin">📍</div>
       <div class="tl-content">
-        <div class="tl-label main">글렌코 & 아일린 도난 성</div>
-        <div class="tl-desc">웅장한 협곡과 호수 위 다리의 성, 스코틀랜드에서 가장 사진이 많이 찍히는 풍경들</div>
+        <div class="tl-label main">로스트 밸리 트레킹 (오후)</div>
+        <div class="tl-desc">협곡 입구~계곡 전망대까지 왕복 약 1.5~2시간 · 폭포와 협곡 절경이 인상적인 초중반 구간만 다녀오는 코스</div>
+        <div class="tl-tags"><span class="tag tag-blue">🥾 트레킹</span></div>
       </div>
     </div>
   </div>
@@ -584,11 +585,16 @@ function scrollToSection(id) { document.getElementById(id).scrollIntoView({ beha
       <img src="https://commons.wikimedia.org/w/index.php?title=Special:FilePath&file=Scotland_Glencoe.jpg&width=400" alt="글렌코">
       <div class="photo-label">글렌코</div>
     </div>
-    <div class="photo-card">
-      <img src="https://commons.wikimedia.org/w/index.php?title=Special:FilePath&file=Eilean_Donan_Castle.jpg&width=400" alt="아일린 도난 성">
-      <div class="photo-label">아일린 도난 성</div>
-    </div>
   </div>
+</div>
+
+<div class="section-header" id="sec-skye">
+  <div class="section-left">
+    <span class="section-emoji">⛰</span>
+    <span class="section-city">스카이섬 · 포트리</span>
+    <span class="section-period">8/29 – 8/30</span>
+  </div>
+  <span class="section-hotel tbd">🏨 호텔 미정</span>
 </div>
 
 <div class="day-block">
@@ -597,18 +603,37 @@ function scrollToSection(id) { document.getElementById(id).scrollIntoView({ beha
       <span class="day-num">11일차</span>
       <span class="day-date">8/29(토)</span>
     </div>
-    <span class="day-theme">⛰ 스카이섬 1일차</span>
+    <span class="day-theme">⛰ 스카이섬 이동</span>
   </div>
   <div class="timeline">
     <div class="tl-item">
+      <div class="tl-dot gray"></div>
+      <div class="tl-content">
+        <div class="tl-label">Glencoe → 스카이섬(포트리) 이동 (오전)</div>
+        <div class="tl-desc">렌터카 약 2시간 30분~3시간 · 아일린 도난 성 경유</div>
+        <div class="tl-tags"><span class="tag tag-gold">🔜 미예약</span></div>
+      </div>
+    </div>
+    <div class="tl-item">
       <div class="tl-pin">📍</div>
       <div class="tl-content">
-        <div class="tl-label main">올드맨 오브 스토르</div>
+        <div class="tl-label main">아일린 도난 성</div>
+        <div class="tl-desc">호수 위 다리로 연결된 스코틀랜드에서 가장 사진이 많이 찍히는 성</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">올드맨 오브 스토르 (오후)</div>
         <div class="tl-desc">기암 첨탑이 솟은 스카이섬 대표 트레킹 코스</div>
       </div>
     </div>
   </div>
   <div class="photo-strip">
+    <div class="photo-card">
+      <img src="https://commons.wikimedia.org/w/index.php?title=Special:FilePath&file=Eilean_Donan_Castle.jpg&width=400" alt="아일린 도난 성">
+      <div class="photo-label">아일린 도난 성</div>
+    </div>
     <div class="photo-card">
       <img src="https://commons.wikimedia.org/w/index.php?title=Special:FilePath&file=Old_Man_of_Storr.jpg&width=400" alt="올드맨 오브 스토르">
       <div class="photo-label">올드맨 오브 스토르</div>
@@ -622,7 +647,7 @@ function scrollToSection(id) { document.getElementById(id).scrollIntoView({ beha
       <span class="day-num">12일차</span>
       <span class="day-date">8/30(일)</span>
     </div>
-    <span class="day-theme">⛰ 스카이섬 2일차</span>
+    <span class="day-theme">⛰ 스카이섬 종일</span>
   </div>
   <div class="timeline">
     <div class="tl-item">
