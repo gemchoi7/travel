@@ -219,7 +219,7 @@ function scrollToSection(id) { document.getElementById(id).scrollIntoView({ beha
       <div class="tl-dot gray"></div>
       <div class="tl-content">
         <div class="tl-label">인천 → 런던 (항공사 비교 중)</div>
-        <div class="tl-desc">대한항공 KE907(10:40 출발) vs 버진애틀랜틱 VS209(12:25 출발) 비교 검토 중 · 직항 14~14.5시간</div>
+        <div class="tl-desc">대한항공 KE907(약 10:55 출발→17:20 도착, 14시간25분) vs 버진애틀랜틱 VS209(12:25 출발→18:50 도착) 비교 검토 중 · 최신 검색 기준 시간 재확인 완료</div>
         <div class="tl-tags"><span class="tag tag-gold">🔜 미예약</span></div>
       </div>
     </div>
@@ -227,7 +227,7 @@ function scrollToSection(id) { document.getElementById(id).scrollIntoView({ beha
       <div class="tl-dot gray"></div>
       <div class="tl-content">
         <div class="tl-label">런던 히스로 도착 (현지시간, 같은 날)</div>
-        <div class="tl-desc">KE907 기준 약 16:00, VS209 기준 약 18:50 · 시차 덕분에 같은 날 저녁 도착</div>
+        <div class="tl-desc">KE907 기준 약 17:20, VS209 기준 약 18:50 · 시차 덕분에 같은 날 저녁 도착</div>
       </div>
     </div>
     <div class="tl-item">
@@ -252,9 +252,16 @@ function scrollToSection(id) { document.getElementById(id).scrollIntoView({ beha
     <div class="tl-item">
       <div class="tl-dot gray"></div>
       <div class="tl-content">
-        <div class="tl-label">런던 패딩턴 → 바스 스파 (기차)</div>
-        <div class="tl-desc">약 1시간 15분 · 왕복 기차편 미예약</div>
-        <div class="tl-tags"><span class="tag tag-gold">🔜 미예약</span></div>
+        <div class="tl-label"><span class="tl-time">약 07:20</span>빅토리아역 집합 (런던소풍 바캐스투어)</div>
+        <div class="tl-desc">전용 차량으로 이동, 정시 출발(지각 시 탑승 불가) · 시그니처 김밥 도시락 제공</div>
+        <div class="tl-tags"><span class="tag tag-gold">🔜 예약 예정</span></div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">스톤헨지</div>
+        <div class="tl-desc">선사시대 거석 유적, 유네스코 세계유산 · 입장료 별도(현금 권장)</div>
       </div>
     </div>
     <div class="tl-item">
@@ -267,14 +274,15 @@ function scrollToSection(id) { document.getElementById(id).scrollIntoView({ beha
     <div class="tl-item">
       <div class="tl-pin">📍</div>
       <div class="tl-content">
-        <div class="tl-label main">바스 애비 & 로열 크레센트</div>
-        <div class="tl-desc">고딕 성당과 조지안 시대 초승달 모양 주택가, 도보로 이어지는 코스</div>
+        <div class="tl-label main">바스 애비 & 로열 크레센트, 캐슬쿰(하절기)</div>
+        <div class="tl-desc">고딕 성당과 조지안 시대 초승달 모양 주택가 · 여름철엔 "영국에서 가장 예쁜 마을" 캐슬쿰도 방문</div>
       </div>
     </div>
     <div class="tl-item">
       <div class="tl-dot gray"></div>
       <div class="tl-content">
-        <div class="tl-label">저녁 런던 복귀</div>
+        <div class="tl-label"><span class="tl-time">약 19:00</span>빅토리아역 도착, 투어 종료</div>
+        <div class="tl-desc">교통상황에 따라 시간 변동 가능</div>
       </div>
     </div>
   </div>
@@ -298,30 +306,38 @@ function scrollToSection(id) { document.getElementById(id).scrollIntoView({ beha
     <div class="tl-item">
       <div class="tl-dot gray"></div>
       <div class="tl-content">
-        <div class="tl-label">런던 빅토리아 → 시퍼드/이스트본 (기차)</div>
-        <div class="tl-desc">약 1시간 30분~2시간 · 왕복 기차편 미예약</div>
-        <div class="tl-tags"><span class="tag tag-gold">🔜 미예약</span></div>
+        <div class="tl-label"><span class="tl-time">07:20</span>빅토리아역 집합 (런던소풍 남부투어)</div>
+        <div class="tl-desc">전용 차량으로 이동, 정시 출발(지각 시 탑승 불가) · 시그니처 김밥 도시락 제공</div>
+        <div class="tl-tags"><span class="tag tag-gold">🔜 예약 예정</span></div>
       </div>
     </div>
     <div class="tl-item">
       <div class="tl-pin">📍</div>
       <div class="tl-content">
-        <div class="tl-label main">세븐시스터즈 화이트 절벽 트레킹</div>
-        <div class="tl-desc">7개의 백악 절벽이 이어지는 해안 트레킹, 왕복 약 2~3시간</div>
-        <div class="tl-tags"><span class="tag tag-blue">🥾 트레킹</span></div>
+        <div class="tl-label main">세븐시스터즈 (시포드 헤드)</div>
+        <div class="tl-desc">7개의 백악 절벽이 이어지는 해안 절경, 코스트가드 코티지 포토스팟</div>
       </div>
     </div>
     <div class="tl-item">
       <div class="tl-pin">📍</div>
       <div class="tl-content">
-        <div class="tl-label main">브라이튼 팰리스 피어 & 시내</div>
-        <div class="tl-desc">알록달록한 해변 산책로와 레인즈 골목 쇼핑</div>
+        <div class="tl-label main">브라이튼</div>
+        <div class="tl-desc">보헤미안 감성의 더 레인즈·노스레인 골목, 팰리스 피어 & 해변 산책</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">메이필드 라벤더 팜</div>
+        <div class="tl-desc">보랏빛 라벤더 밭에서 여름 시즌 한정 포토타임 · 라벤더팜 8/23 폐장이라 8/21 방문 가능</div>
+        <div class="tl-tags"><span class="tag tag-star">🌾 시즌 확정</span></div>
       </div>
     </div>
     <div class="tl-item">
       <div class="tl-dot gray"></div>
       <div class="tl-content">
-        <div class="tl-label">저녁 런던 복귀</div>
+        <div class="tl-label"><span class="tl-time">약 18:00</span>빅토리아역 도착, 투어 종료</div>
+        <div class="tl-desc">교통상황에 따라 시간 변동 가능 · 종료 후 인근에서 저녁 식사·쇼핑</div>
       </div>
     </div>
   </div>
@@ -589,10 +605,10 @@ function scrollToSection(id) { document.getElementById(id).scrollIntoView({ beha
 <div class="section-header" id="sec-glencoe">
   <div class="section-left">
     <span class="section-emoji">🏔</span>
-    <span class="section-city">Glencoe</span>
+    <span class="section-city">Glencoe / 포트윌리엄</span>
     <span class="section-period">8/28</span>
   </div>
-  <span class="section-hotel tbd">🏨 호텔 미정</span>
+  <span class="section-hotel tbd">🏨 글렌코 or 포트윌리엄 (미정)</span>
 </div>
 
 <div class="day-block">
@@ -787,7 +803,7 @@ function scrollToSection(id) { document.getElementById(id).scrollIntoView({ beha
     <span class="section-city">에든버러</span>
     <span class="section-period">9/1 – 9/2</span>
   </div>
-  <span class="section-hotel tbd">🏨 호텔 미정</span>
+  <span class="section-hotel">🏨 Princess Street Suite (예정)</span>
 </div>
 
 <div class="day-block">
