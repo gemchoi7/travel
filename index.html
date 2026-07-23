@@ -223,6 +223,14 @@
       line-height: 1.2;
     }
 
+    .trip-duration {
+      display: inline-block;
+      margin-top: 0.25rem;
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      font-weight: 500;
+    }
+
     .trip-cities {
       margin: 0.125rem 0 0;
       color: var(--color-text-muted);
@@ -334,6 +342,9 @@
         const allCities = uniq(sectionCities);
         const countries = base.codes.map(c => countryMap[c] || c.toUpperCase());
         const country = countries.join(' · ');
+        const heroSubText = doc.querySelector('.hero-sub')?.textContent?.trim() || '';
+        const durationMatch = heroSubText.match(/(\d+)\s*박\s*(\d+)\s*일/);
+        const duration = durationMatch ? `${durationMatch[1]}박 ${durationMatch[2]}일` : '';
         
         return {
           ...base,
@@ -341,6 +352,7 @@
           country,
           countries, 
           cities: allCities,
+          duration,
           ymLabel: base.year && base.month ? `${base.year}.${base.month}` : 'Unknown',
           note: allCities.length ? `${allCities.length}개 도시` : '도시 정보 없음',
           href: `./${file}`,
@@ -352,6 +364,7 @@
           title: file,
           country: countryMap[base.code] || base.code.toUpperCase(),
           cities: [],
+          duration: '',
           ymLabel: base.year && base.month ? `${base.year}.${base.month}` : 'Unknown',
           note: '분석 실패',
           href: `./${file}`,
@@ -383,6 +396,7 @@
             title: file,
             country: countryMap[base.code] || base.code.toUpperCase(),
             cities: [],
+            duration: '',
             ymLabel: base.year && base.month ? `${base.year}.${base.month}` : 'Unknown',
             note: '로드 실패',
             href: `./${file}`,
@@ -427,7 +441,7 @@
       return fileData.filter(item => {
         const hitCountry = !country || item.countries.some(c => c.toLowerCase() === country);
         const hitCity = !city || item.cities.some(name => name.toLowerCase() === city);
-        const haystack = [item.file, item.country, item.title, item.note, item.ymLabel, ...item.cities].join(' ').toLowerCase();
+        const haystack = [item.file, item.country, item.title, item.note, item.duration, item.ymLabel, ...item.cities].join(' ').toLowerCase();
         const hitKeyword = !keyword || keyword.split(/\s+/).every(k => haystack.includes(k.toLowerCase()));
         return hitCountry && hitCity && hitKeyword;
       });
@@ -454,6 +468,7 @@
             <div>
               <span class="trip-date">${item.ymLabel}</span>
               <h3 class="trip-country">${item.country}</h3>
+              ${item.duration ? `<span class="trip-duration">${item.duration}</span>` : ''}
               <p class="trip-cities">
                 ${item.cities.length ? item.cities.join(' · ') : '도시 정보 없음'}
               </p>
