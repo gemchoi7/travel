@@ -24,20 +24,8 @@ color: #fff;
 position: relative;
 overflow: hidden;
 }
-.hero::before {
-content:'';
-position:absolute; top:-60px; right:-60px;
-width:220px; height:220px; border-radius:50%;
-background:rgba(255,255,255,.04);
-}
-.hero::after {
-content:'';
-position:absolute; bottom:-1px; left:0; right:0;
-height:26px; background:#f2f2f4;
-border-radius:26px 26px 0 0;
-}
 .hero-flag  { font-size:40px; margin-bottom:10px; }
-.hero-title { font-size:26px; font-weight:900; letter-spacing:-.5px; }
+.hero-title { font-size:28px; font-weight:900; letter-spacing:-.5px; }
 .hero-sub   { font-size:13px; color:rgba(255,255,255,.65); margin-top:5px; }
 .hero-cities{ display:flex; gap:8px; margin-top:22px; flex-wrap:wrap; }
 .city-badge {
@@ -182,8 +170,8 @@ function scrollToSection(id) { document.getElementById(id).scrollIntoView({ beha
 </script>
 
 <div class="hero">
-  <div class="hero-flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿🇬🇧</div>
-  <div class="hero-title">스코틀랜드 & 런던 위스키 기행</div>
+  <div class="hero-flag">🇬🇧🏴󠁧󠁢󠁳󠁣󠁴󠁿</div>
+  <div class="hero-title">영국·스코틀랜드 여행 일정표</div>
   <div class="hero-sub">8/19(수) — 9/3(목) · 15박 16일</div>
   <div class="hero-cities">
     <div class="city-badge" onclick="scrollToSection('sec-london1')">🏙 London 3박</div>
