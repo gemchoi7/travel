@@ -36,6 +36,15 @@ font-size:12px; font-weight:600;
 cursor: pointer;
 white-space: nowrap;
 }
+.util-badge {
+position:absolute; right:20px; z-index:5;
+display:inline-flex; align-items:center; gap:5px;
+font-size:11.5px; font-weight:800;
+color:#152736; background:#fff;
+padding:7px 14px; border-radius:10px;
+text-decoration:none; white-space:nowrap;
+box-shadow:0 2px 6px rgba(0,0,0,.18);
+}
 .hero-note {
 margin-top:16px; font-size:11px; color:rgba(255,255,255,.55);
 background:rgba(255,255,255,.08); padding:8px 12px; border-radius:10px;
@@ -169,8 +178,8 @@ function scrollToSection(id) { document.getElementById(id).scrollIntoView({ beha
 </script>
 
 <div class="hero">
-  <a href="./202608_sco_food.html" style="position:absolute; top:20px; right:118px; z-index:5; display:inline-flex; align-items:center; gap:4px; font-size:11.5px; font-weight:700; color:#fff; background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.28); padding:6px 12px; border-radius:20px; text-decoration:none;">🍽 맛집리스트</a>
-  <a href="./202608_sco_checklist.html" style="position:absolute; top:20px; right:20px; z-index:5; display:inline-flex; align-items:center; gap:4px; font-size:11.5px; font-weight:700; color:#fff; background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.28); padding:6px 12px; border-radius:20px; text-decoration:none;">✅ 체크리스트</a>
+  <a href="./202608_sco_food.html" class="util-badge" style="top:20px;">🍽 맛집가이드</a>
+  <a href="./202608_sco_checklist.html" class="util-badge" style="top:60px;">✅ 체크리스트</a>
   <div class="hero-flag">🇬🇧🏴󠁧󠁢󠁳󠁣󠁴󠁿</div>
   <div class="hero-title">영국·스코틀랜드 여행 일정표</div>
   <div class="hero-sub">8/19(수) — 9/3(목) · 15박 16일</div>
