@@ -141,13 +141,11 @@
 </div>
 
 <div class="section">
-  <div class="section-title">✈️ 항공/교통 (시간순)</div>
+  <div class="section-title">✈️ 항공/교통</div>
   <div class="item"><input type="checkbox" id="i1"><label for="i1"><b>인천 → 런던 (8/19)</b> — 대한항공 KE907(10:55→17:20) vs 버진애틀랜틱 VS209(12:25→18:50) 비교 검토 중<span class="tag tag-warn">미예약</span></label></div>
   <div class="item"><input type="checkbox" id="i2"><label for="i2">런던 → 글래스고 기차 (8/22, Avanti West Coast, 유스턴역)</label></div>
-  <div class="item"><input type="checkbox" id="i3"><label for="i3"><b>렌터카 픽업</b> (글래스고, 8/24 10:00) — Enterprise, 볼보 XC40, 무제한마일리지, TripCover, 추가운전자 포함, 총액 약 ₩1,560,397</label></div>
-  <div class="item"><input type="checkbox" id="i4"><label for="i4">Kennacraig → Islay(Port Askaig) 페리 (8/26 10:00 출발, CalMac, 편도, 차량 동반)</label></div>
-  <div class="item"><input type="checkbox" id="i5"><label for="i5">Islay(Port Askaig) → Kennacraig 페리 (8/28 09:35 출발, 체크인 09:05, 편도, 차량 동반, 왕복 한번에 예약 가능)</label></div>
-  <div class="item"><input type="checkbox" id="i6"><label for="i6"><b>렌터카 반납</b> (에든버러 웨이벌리역, 9/1) — 영문운전면허증 + 국제운전면허증 둘 다 지참</label></div>
+  <div class="item"><input type="checkbox" id="i3"><label for="i3"><b>렌터카</b> (글래스고 8/24 10:00 픽업 → 에든버러 웨이벌리역 9/1 반납) — Enterprise, 볼보 XC40, 무제한마일리지, TripCover, 추가운전자 포함, 총액 약 ₩1,560,397 · 영문+국제운전면허증 지참</label></div>
+  <div class="item checked"><input type="checkbox" id="i4" checked><label for="i4">Kennacraig ↔ Islay(Port Askaig) 페리 왕복 (8/26 10:00 / 8/28 09:35, CalMac, 차량 동반)<span class="tag">예약완료</span></label></div>
   <div class="item"><input type="checkbox" id="i7"><label for="i7">에든버러 → 런던 국내선 (9/3 아침)</label></div>
   <div class="item checked"><input type="checkbox" id="i8" checked><label for="i8"><b>런던 → 인천 (9/3)</b> — 아시아나 OZ522 16:45 출발<span class="tag">예약완료</span></label></div>
 </div>
@@ -190,7 +188,6 @@
 <div class="note-box">
   <b>💡 참고</b><br>
   · 렌터카는 하나로 통일 — 아일라도 페리 왕복으로 차 가지고 이동<br>
-  · 8/28 페리날은 지정운전자 필요 (술 안 마신 사람 담당)<br>
   · 페리 결항 리스크 있음 — 결항 시 하루 밀리는 것 감안<br>
   · CalMac: 체크인 마감 전 무료 변경, 취소는 24시간 전 £10 차감, eTicket(QR)만 있으면 승선 가능
 </div>
@@ -203,7 +200,7 @@
 
   // 최초 설정 후 여기에 블롭 ID를 채워넣으면 모든 사람이 같은 데이터를 공유하게 됩니다.
   // 예: const BLOB_ID = '68a1f2c3e4b0a1234567890a';
-  const BLOB_ID = '';
+  const BLOB_ID = '019f8fc0-5ec8-7944-ac6d-6cc155b18246';
 
   const API_BASE = 'https://jsonblob.com/api/jsonBlob';
   const syncStatusText = document.getElementById('syncStatusText');
