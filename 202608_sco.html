@@ -185,8 +185,7 @@ function scrollToSection(id) { document.getElementById(id).scrollIntoView({ beha
     <div class="city-badge" onclick="scrollToSection('sec-london1')">🏙 London 3박</div>
     <div class="city-badge" onclick="scrollToSection('sec-glasgow1')">🌆 Glasgow 2박</div>
     <div class="city-badge" onclick="scrollToSection('sec-campbeltown')">🥃 Campbeltown 2박</div>
-    <div class="city-badge" onclick="scrollToSection('sec-islay')">🌊 포트엘렌 1박</div>
-    <div class="city-badge" onclick="scrollToSection('sec-islay')">🌊 보모어 1박</div>
+    <div class="city-badge" onclick="scrollToSection('sec-islay')">🌊 Islay 2박</div>
     <div class="city-badge" onclick="scrollToSection('sec-glencoe')">🏔 Fort William 1박</div>
     <div class="city-badge" onclick="scrollToSection('sec-skye')">⛰ Skye 2박</div>
     <div class="city-badge" onclick="scrollToSection('sec-dufftown')">🥃 Speyside 1박</div>
@@ -586,7 +585,10 @@ function scrollToSection(id) { document.getElementById(id).scrollIntoView({ beha
     <span class="section-city">Islay</span>
     <span class="section-period">8/26 – 8/28</span>
   </div>
-  <span class="section-hotel">🏨 2박 (숙소 2곳, 아래 참고)</span>
+  <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+    <a class="section-hotel" onclick="openMap('https://maps.google.com/?q=103+Frederick+Cres,+Port+Ellen,+Isle+of+Islay+PA42+7BQ')">🏨 포트엘렌 1박 📍</a>
+    <a class="section-hotel" onclick="openMap('https://maps.google.com/?q=The+Square,+Bowmore,+Isle+of+Islay+PA43+7JP')">🏨 보모어 1박 📍</a>
+  </div>
 </div>
 
 <div class="day-block">
