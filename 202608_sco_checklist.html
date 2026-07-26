@@ -128,16 +128,9 @@
     </div>
     <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
   </div>
-  <div id="syncStatus" style="margin-top:10px; font-size:11px; color:rgba(255,255,255,.6); display:flex; align-items:center; justify-content:space-between;">
-    <span id="syncStatusText">동기화 확인 중…</span>
-    <a href="#" id="syncRefreshBtn" style="color:#fff; text-decoration:underline;">🔄 새로고침</a>
+  <div style="margin-top:10px; font-size:11px; color:rgba(255,255,255,.6); line-height:1.6;">
+    💡 체크는 이 기기에만 저장돼요. 예약 완료하시면 Claude에게 "OO 예약했어"라고 말씀해주시면 최신 상태로 업데이트해드려요.
   </div>
-</div>
-
-<div id="setupBanner" style="display:none; margin:12px 14px 0; background:#fdece1; border:1px solid #e8a870; border-radius:12px; padding:12px 14px; font-size:12px; color:#7a3c0f; line-height:1.6;">
-  <b>⚙️ 최초 설정 필요</b><br>
-  아직 공유 저장소가 연결 안 됐어요. 아래 ID를 복사해서 Claude한테 알려주시면 코드에 반영해드릴게요.<br>
-  <code id="newBlobId" style="display:block; margin-top:6px; padding:6px 8px; background:#fff; border-radius:6px; word-break:break-all; font-size:11px;"></code>
 </div>
 
 <div class="section">
@@ -232,15 +225,6 @@
   const checkboxes = document.querySelectorAll('.item input[type="checkbox"]');
   const STORAGE_KEY = 'sco_checklist_v1';
 
-  // 최초 설정 후 여기에 블롭 ID를 채워넣으면 모든 사람이 같은 데이터를 공유하게 됩니다.
-  // 예: const BLOB_ID = '68a1f2c3e4b0a1234567890a';
-  const BLOB_ID = '6cc8f5b34ad948a96b8b';
-
-  const API_BASE = 'https://api.npoint.io';
-  const syncStatusText = document.getElementById('syncStatusText');
-  const setupBanner = document.getElementById('setupBanner');
-  const newBlobIdEl = document.getElementById('newBlobId');
-
   function getLocalState() {
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) { return {}; }
   }
@@ -274,86 +258,15 @@
     cb.closest('.item').classList.toggle('checked', cb.checked);
   }
 
-  async function createSharedBlob() {
-    try {
-      const res = await fetch(API_BASE, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(collectState()),
-      });
-      const location = res.headers.get('Location') || '';
-      const id = location.split('/').pop();
-      if (id) {
-        newBlobIdEl.textContent = id;
-        setupBanner.style.display = 'block';
-        syncStatusText.textContent = '⚠️ 이 브라우저에만 저장됨 (아래 설정 필요)';
-      } else {
-        syncStatusText.textContent = '⚠️ 이 브라우저에만 저장됨 (공유 저장소 생성 실패)';
-      }
-    } catch (e) {
-      syncStatusText.textContent = '⚠️ 이 브라우저에만 저장됨 (네트워크 오류)';
-    }
-  }
-
-  async function fetchSharedState() {
-    if (!BLOB_ID) { await createSharedBlob(); return null; }
-    syncStatusText.textContent = '🔄 동기화 확인 중…';
-    try {
-      const res = await fetch(`${API_BASE}/${BLOB_ID}`);
-      if (!res.ok) throw new Error('fetch failed');
-      const data = await res.json();
-      syncStatusText.textContent = '✅ 모두와 공유 중';
-      return data;
-    } catch (e) {
-      syncStatusText.textContent = '⚠️ 오프라인 (이 브라우저 저장본 표시 중)';
-      return null;
-    }
-  }
-
-  async function pushSharedState(state) {
-    if (!BLOB_ID) return;
-    try {
-      await fetch(`${API_BASE}/${BLOB_ID}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(state),
-      });
-      syncStatusText.textContent = '✅ 모두와 공유 중';
-    } catch (e) {
-      syncStatusText.textContent = '⚠️ 저장 실패 (네트워크 확인 필요)';
-    }
-  }
-
-  async function init() {
-    applyState(getLocalState());
-    const shared = await fetchSharedState();
-    if (shared) {
-      applyState(shared);
-      setLocalState(shared);
-    }
-  }
-
   checkboxes.forEach(cb => {
     cb.addEventListener('change', () => {
       updateItemStyle(cb);
       updateProgress();
-      const state = collectState();
-      setLocalState(state);
-      pushSharedState(state);
+      setLocalState(collectState());
     });
   });
 
-  document.getElementById('syncRefreshBtn').addEventListener('click', async (e) => {
-    e.preventDefault();
-    const shared = await fetchSharedState();
-    if (shared) { applyState(shared); setLocalState(shared); }
-  });
-
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'visible') init();
-  });
-
-  init();
+  applyState(getLocalState());
   checkDeadlines();
 </script>
 
