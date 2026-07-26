@@ -127,8 +127,8 @@
     </div>
     <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
   </div>
-  <div style="margin-top:10px; font-size:11px; color:rgba(255,255,255,.6); line-height:1.6;">
-    💡 체크는 이 기기에만 저장돼요. 예약 완료하시면 Claude에게 "OO 예약했어"라고 말씀해주시면 최신 상태로 업데이트해드려요.
+  <div style="margin-top:10px; font-size:11px; color:rgba(255,255,255,.6);" id="syncStatusText">
+    🔄 동기화 확인 중…
   </div>
 </div>
 
@@ -224,6 +224,8 @@
 
   const checkboxes = document.querySelectorAll('.item input[type="checkbox"]');
   const STORAGE_KEY = 'sco_checklist_v1';
+  const BLOB_ID = '019f9de9-22c4-7c4a-9c25-0438b57c3e8c';
+  const API_BASE = 'https://jsonblob.com/api/jsonBlob';
 
   function getLocalState() {
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) { return {}; }
@@ -258,15 +260,56 @@
     cb.closest('.item').classList.toggle('checked', cb.checked);
   }
 
+  async function fetchSharedState() {
+    try {
+      const res = await fetch(`${API_BASE}/${BLOB_ID}`);
+      if (!res.ok) throw new Error('fetch failed');
+      const data = await res.json();
+      document.getElementById('syncStatusText').textContent = '✅ 모두와 공유 중';
+      return data;
+    } catch (e) {
+      document.getElementById('syncStatusText').textContent = '⚠️ 오프라인 (이 기기 저장본 표시 중)';
+      return null;
+    }
+  }
+
+  async function pushSharedState(state) {
+    try {
+      await fetch(`${API_BASE}/${BLOB_ID}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(state),
+      });
+      document.getElementById('syncStatusText').textContent = '✅ 모두와 공유 중';
+    } catch (e) {
+      document.getElementById('syncStatusText').textContent = '⚠️ 저장 실패';
+    }
+  }
+
   checkboxes.forEach(cb => {
     cb.addEventListener('change', () => {
       updateItemStyle(cb);
       updateProgress();
-      setLocalState(collectState());
+      const state = collectState();
+      setLocalState(state);
+      pushSharedState(state);
     });
   });
 
-  applyState(getLocalState());
+  async function init() {
+    applyState(getLocalState());
+    const shared = await fetchSharedState();
+    if (shared) {
+      applyState(shared);
+      setLocalState(shared);
+    }
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') init();
+  });
+
+  init();
   checkDeadlines();
 </script>
 
