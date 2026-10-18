@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>🇹🇭 치앙마이·빠이·치앙라이 여행 일정</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #f2f2f4;
+    color: #1a1a1a;
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+
+.hero {
+background: linear-gradient(160deg, #1a3d2e 0%, #2f7d4f 55%, #52a870 100%);
+padding: 52px 24px 40px;
+color: #fff;
+position: relative;
+overflow: hidden;
+}
+.hero-flag  { font-size:40px; margin-bottom:10px; }
+.hero-title { font-size:28px; font-weight:900; letter-spacing:-.5px; }
+.hero-sub   { font-size:13px; color:rgba(255,255,255,.65); margin-top:5px; }
+.hero-cities{ display:flex; gap:8px; margin-top:22px; flex-wrap:wrap; }
+.city-badge {
+background:rgba(255,255,255,.13);
+border:1px solid rgba(255,255,255,.22);
+border-radius:20px; padding:6px 13px;
+font-size:12px; font-weight:600;
+cursor: pointer;
+white-space: nowrap;
+}
+.util-link {
+position:absolute; right:24px; z-index:5;
+font-size:12px; font-weight:600;
+color:rgba(255,255,255,.85);
+text-decoration:underline; text-underline-offset:3px;
+white-space:nowrap;
+}
+.hero-note {
+margin-top:16px; font-size:11px; color:rgba(255,255,255,.55);
+background:rgba(255,255,255,.08); padding:8px 12px; border-radius:10px;
+line-height:1.5;
+}
+.section-header {
+background:#fff; padding:14px 18px 12px;
+display:flex; align-items:center; justify-content:space-between;
+position:sticky; top:0; z-index:20;
+box-shadow:0 2px 10px rgba(0,0,0,.08);
+border-bottom:1px solid #ebebeb;
+}
+.section-left{ display:flex; align-items:center; gap:8px; }
+.section-emoji{ font-size:17px; }
+.section-city { font-size:16px; font-weight:900; letter-spacing:-.4px; }
+.section-period{
+font-size:11px; color:#999; font-weight:600;
+background:#f5f5f7; padding:3px 9px; border-radius:20px;
+}
+.section-hotel{
+font-size:11px; color:#2f7d4f; background:#e5f3ea;
+padding:4px 10px; border-radius:20px; font-weight:700;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.18s, color 0.18s, transform 0.12s;
+}
+.section-hotel:hover {
+  background: #2f7d4f;
+  color: #fff;
+  transform: scale(1.04);
+}
+.section-hotel.tbd{
+  color:#a08a3c; background:#fbf4e2; cursor:default;
+}
+.section-hotel.tbd:hover{ background:#fbf4e2; color:#a08a3c; transform:none; }
+
+.day-block{ background:#fff; margin-bottom:8px; }
+.day-header{
+padding:16px 18px 12px;
+display:flex; align-items:center; justify-content:space-between;
+border-bottom:1px solid #f5f5f7;
+}
+.day-left{ display:flex; align-items:baseline; gap:10px; }
+.day-num  { font-size:16px; font-weight:900; color:#111; }
+.day-date { font-size:13px; color:#777; font-weight:500; }
+.day-theme{
+font-size:12px; color:#2f7d4f; font-weight:700;
+background:#e5f3ea; padding:3px 10px; border-radius:20px;
+white-space:nowrap;
+}
+.day-theme.star{ color:#a8461f; background:#fdece1; }
+
+.timeline{ padding:6px 18px 2px; }
+.tl-item{
+display:flex; gap:14px;
+padding:10px 0; position:relative;
+}
+.tl-item:not(:last-child)::after{
+content:''; position:absolute;
+left:5px; top:26px; bottom:-10px;
+width:1.5px; background:#e5e5e5;
+}
+.tl-dot{
+width:11px; height:11px; border-radius:50%;
+background:#c8c8c8; flex-shrink:0; margin-top:5px;
+}
+.tl-dot.blue  { background:#2f7d4f; box-shadow:0 0 0 3px rgba(47,125,79,.18); }
+.tl-dot.orange{ background:#e07b39; box-shadow:0 0 0 3px rgba(224,123,57,.18); }
+.tl-pin{
+font-size:15px; flex-shrink:0;
+margin-top:1px; line-height:1;
+width:16px; text-align:center;
+}
+.tl-content{ flex:1; }
+.tl-label{ font-size:14px; font-weight:700; color:#111; line-height:1.45; }
+.tl-label.main{ font-size:15px; font-weight:800; color:#16281e; }
+.tl-desc{ font-size:12px; color:#999; line-height:1.55; margin-top:2px; }
+.tl-time{ font-size:11px; color:#bbb; font-weight:700; margin-right:5px; }
+.tl-tags{ display:flex; gap:5px; flex-wrap:wrap; margin-top:5px; }
+.tag{
+display:inline-block; font-size:11px; font-weight:700;
+padding:2px 8px; border-radius:10px;
+}
+.tag-orange{ color:#c4611a; background:#fef0e4; }
+.tag-blue  { color:#2f7d4f; background:#e5f3ea; }
+.tag-green { color:#1e8c5e; background:#e2f5ec; }
+.tag-red   { color:#c0392b; background:#fde8e6; }
+.tag-gold  { color:#a08a3c; background:#fbf4e2; }
+.tag-star  { color:#a8461f; background:#fdece1; }
+.tag-purple{ color:#7a4fa0; background:#f2e9f8; }
+
+.photo-strip{
+display:flex; gap:8px;
+padding:8px 18px 14px;
+overflow-x:auto; scrollbar-width:none;
+}
+.photo-strip::-webkit-scrollbar{ display:none; }
+.photo-card{
+flex-shrink:0; width:140px; height:95px;
+border-radius:12px; overflow:hidden;
+background:#dde0e5; position:relative;
+}
+.photo-card img{
+width:100%; height:100%; object-fit:cover; display:block;
+transition:transform .3s ease;
+}
+.photo-card:hover img{ transform:scale(1.04); }
+.photo-label{
+position:absolute; bottom:0; left:0; right:0;
+background:linear-gradient(transparent,rgba(0,0,0,.58));
+color:#fff; font-size:10px; font-weight:700;
+padding:16px 8px 6px;
+}
+
+.tbd-banner{
+margin:10px 18px 4px; padding:10px 12px;
+background:#fbf4e2; border:1px dashed #d9c584;
+border-radius:10px; font-size:11.5px; color:#8a7530;
+line-height:1.6;
+}
+
+.bottom-spacer{ height:36px; }
+</style>
+</head>
+<body>
+
+<script>
+function scrollToSection(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
+</script>
+
+<div class="hero">
+  <div class="hero-flag">🇹🇭</div>
+  <div class="hero-title">치앙마이·빠이·치앙라이 일정표</div>
+  <div class="hero-sub">10/21(수) — 11/3(화) · 13박 14일</div>
+  <div class="hero-cities">
+    <div class="city-badge" onclick="scrollToSection('sec-cnx1')">🏙 Chiang Mai(6인) 4박</div>
+    <div class="city-badge" onclick="scrollToSection('sec-cnx2')">🏨 Chiang Mai(혼자) 1박</div>
+    <div class="city-badge" onclick="scrollToSection('sec-pai')">🏍 Pai 4박</div>
+    <div class="city-badge" onclick="scrollToSection('sec-cei')">⛰ Chiang Rai 3박</div>
+    <div class="city-badge" onclick="scrollToSection('sec-cnx3')">☕ Chiang Mai(님만) 1박</div>
+  </div>
+  <div class="hero-note">✈️ KE5089 인천→치앙마이(10/21 밤 도착) · KE684 치앙마이→인천(11/3 자정 직후 출발)</div>
+</div>
+
+<div class="section-header" id="sec-cnx1">
+  <div class="section-left">
+    <span class="section-emoji">🏙</span>
+    <span class="section-city">Chiang Mai (6인)</span>
+    <span class="section-period">10/21 – 10/25</span>
+  </div>
+  <a class="section-hotel" href="https://www.google.com/maps/search/?api=1&query=31+Chaiyapoom+Soi+2,+Si+Phum,+Chiang+Mai+50300" target="_blank" rel="noopener">🏨 올드시티 풀빌라 📍</a>
+</div>
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">1일차</span>
+      <span class="day-date">10/21(수)</span>
+    </div>
+    <span class="day-theme">✈️ 출발 & 치앙마이 도착</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label">인천 → 치앙마이 (KE5089)</div>
+        <div class="tl-desc">대한항공 KE5089</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label">밤 치앙마이 도착, 숙소 체크인</div>
+        <div class="tl-desc">올드시티 6인 독채 풀빌라 (31 Chaiyapoom Soi 2, Si Phum)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">2일차</span>
+      <span class="day-date">10/22(목)</span>
+    </div>
+    <span class="day-theme">🛕 올드시티 사원 투어</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">왓 프라싱 (Wat Phra Singh)</div>
+        <div class="tl-desc">올드시티 대표 사원</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">왓 체디루앙 (Wat Chedi Luang)</div>
+        <div class="tl-desc">거대한 고대 불탑 유적</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">님만해민 카페거리</div>
+        <div class="tl-desc">카페·편집숍·갤러리 밀집 지역, 올드시티에서 차로 10~15분</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">3일차</span>
+      <span class="day-date">10/23(금)</span>
+    </div>
+    <span class="day-theme">⛰ 도이수텝 & 반캉왓</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">도이수텝 사원 (Doi Suthep)</div>
+        <div class="tl-desc">치앙마이 시내가 내려다보이는 산 위 사원</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">반캉왓 예술마을 (Baan Kang Wat)</div>
+        <div class="tl-desc">소규모 공방·카페 모인 아기자기한 마을</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">4일차</span>
+      <span class="day-date">10/24(토)</span>
+    </div>
+    <span class="day-theme star">🛍 토요마켓(우아라이)</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">카페 투어</div>
+        <div class="tl-desc">님만/올드시티 카페 자유롭게 둘러보기</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot orange"></div>
+      <div class="tl-content">
+        <div class="tl-label main">우아라이 워킹스트리트 (토요 야시장)</div>
+        <div class="tl-desc">매주 토요일 저녁만 열림, 은세공품·수공예 위주, 올드시티 남쪽</div>
+        <div class="tl-tags"><span class="tag tag-star">⭐ 토요일 한정</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-header" id="sec-cnx2">
+  <div class="section-left">
+    <span class="section-emoji">🏨</span>
+    <span class="section-city">Chiang Mai (혼자)</span>
+    <span class="section-period">10/25 – 10/26</span>
+  </div>
+  <a class="section-hotel" href="https://www.booking.com/hotel/th/prix.html" target="_blank" rel="noopener">🏨 Prix Hotel 📍</a>
+</div>
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">5일차</span>
+      <span class="day-date">10/25(일)</span>
+    </div>
+    <span class="day-theme star">🛍 선데이마켓</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label main">숙소 이동 (6인 숙소 → Prix Hotel)</div>
+        <div class="tl-desc">같은 올드시티권이라 짐 이동 최소화, 혼자 일정 시작</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">자유일정</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot orange"></div>
+      <div class="tl-content">
+        <div class="tl-label main">선데이 나이트마켓 (타패게이트)</div>
+        <div class="tl-desc">치앙마이 최대 규모 일요 야시장</div>
+        <div class="tl-tags"><span class="tag tag-star">⭐ 일요일 한정</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">6일차</span>
+      <span class="day-date">10/26(월)</span>
+    </div>
+    <span class="day-theme">🚐 치앙마이 → 빠이</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label main">미니밴 이동 (약 3~4시간)</div>
+        <div class="tl-desc">쁘렘쁘라차, 아케이드 터미널 출발 · 762개 커브길, 멀미약 권장</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">빠이 캐년</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">빠이 워킹스트리트</div>
+        <div class="tl-desc">매일 저녁 6~10시 운영</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-header" id="sec-pai">
+  <div class="section-left">
+    <span class="section-emoji">🏍</span>
+    <span class="section-city">Pai</span>
+    <span class="section-period">10/26 – 10/30</span>
+  </div>
+  <a class="section-hotel tbd" >🏨 숙소 미정</a>
+</div>
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">7일차</span>
+      <span class="day-date">10/27(화)</span>
+    </div>
+    <span class="day-theme">♨️ 온천 & 랜드스플릿</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">빠이 온천</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">랜드스플릿 (Land Split)</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">커피인러브</div>
+        <div class="tl-desc">논뷰로 유명한 카페</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">8일차</span>
+      <span class="day-date">10/28(수)</span>
+    </div>
+    <span class="day-theme">🐘 액티비티</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">코끼리캠프 or 짚라인</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">9일차</span>
+      <span class="day-date">10/29(목)</span>
+    </div>
+    <span class="day-theme">🧘 자유일정</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">부처동굴 · 폭포 등 근교</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">10일차</span>
+      <span class="day-date">10/30(금)</span>
+    </div>
+    <span class="day-theme">🚌 빠이 → 치앙마이 → 치앙라이</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label main">미니밴 (빠이 → 치앙마이, 약 3~4시간)</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label main">그린버스 환승 (치앙마이 → 치앙라이, 약 3시간)</div>
+        <div class="tl-desc">아케이드 터미널 3에서 탑승 · 당일 환승, 숙박 없음</div>
+      </div>
+    </div>
+  </div>
+  <div class="tbd-banner">💡 빠이↔치앙라이 직행 노선 없음 — 치앙마이 경유 당일 환승. 최소 1시간 이상 환승 버퍼 권장</div>
+</div>
+
+<div class="section-header" id="sec-cei">
+  <div class="section-left">
+    <span class="section-emoji">⛰</span>
+    <span class="section-city">Chiang Rai</span>
+    <span class="section-period">10/30 – 11/2</span>
+  </div>
+  <a class="section-hotel tbd" >🏨 숙소 미정</a>
+</div>
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">11일차</span>
+      <span class="day-date">10/31(토)</span>
+    </div>
+    <span class="day-theme star">🛕 사원 & 토요마켓</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">화이트 템플 (왓 롱쿤)</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">블루 템플 (왓 롱수아텐)</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot orange"></div>
+      <div class="tl-content">
+        <div class="tl-label main">치앙라이 워킹스트리트 (토요 야시장)</div>
+        <div class="tl-desc">시계탑 근처, 토요일에만 운영</div>
+        <div class="tl-tags"><span class="tag tag-star">⭐ 토요일 한정</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">12일차</span>
+      <span class="day-date">11/1(일)</span>
+    </div>
+    <span class="day-theme">🍃 블랙하우스 & 차밭</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">블랙하우스 (반담 뮤지엄)</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">추이퐁 차밭 (Choui Fong Tea Plantation)</div>
+        <div class="tl-desc">시내에서 차로 40~50분, 그랩 왕복 대절 또는 조인투어 이용 · 계단식 차밭 뷰 카페</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">13일차</span>
+      <span class="day-date">11/2(월)</span>
+    </div>
+    <span class="day-theme">🚌 치앙라이 → 치앙마이</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label main">그린버스 이동 (약 3시간)</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label main">님만해민 체크인</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-pin">📍</div>
+      <div class="tl-content">
+        <div class="tl-label main">마지막 자유시간</div>
+        <div class="tl-desc">카페·쇼핑, 저녁 공항 이동 준비</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-header" id="sec-cnx3">
+  <div class="section-left">
+    <span class="section-emoji">☕</span>
+    <span class="section-city">Chiang Mai (님만)</span>
+    <span class="section-period">11/2 – 11/3</span>
+  </div>
+  <a class="section-hotel tbd" >🏨 숙소 미정</a>
+</div>
+
+<div class="day-block">
+  <div class="day-header">
+    <div class="day-left">
+      <span class="day-num">14일차</span>
+      <span class="day-date">11/3(화) 자정 직후</span>
+    </div>
+    <span class="day-theme">✈️ 출국</span>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label main">공항 이동</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot blue"></div>
+      <div class="tl-content">
+        <div class="tl-label main">치앙마이 → 인천 (KE684)</div>
+        <div class="tl-desc">대한항공 KE684, 자정 직후 출발</div>
+      </div>
+    </div>
+  </div>
+  <div class="tbd-banner">⚠️ 안전 수칙: 숙소/여행사를 통하지 않은 낯선 차량·투어는 타지 않기 · 이동은 그랩 등 기록 남는 앱 이용 · 골든트라이앵글은 태국 쪽 전망대만 방문, 보트로 강 건너는 투어는 피할 것</div>
+</div>
+
+<div class="bottom-spacer"></div>
+</body>
+</html>
