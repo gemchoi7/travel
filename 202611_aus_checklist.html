@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>✅ 호주 예약 체크리스트</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #f2f2f4;
+    color: #1a1a1a;
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding-bottom: 40px;
+  }
+
+.hero {
+  background: linear-gradient(160deg, #082840 0%, #0f4c75 55%, #1b7aad 100%);
+  padding: 44px 24px 28px;
+  color: #fff;
+}
+.hero-back {
+  display: inline-block;
+  font-size: 12px;
+  color: rgba(255,255,255,.7);
+  text-decoration: none;
+  margin-bottom: 14px;
+}
+.hero-title { font-size: 24px; font-weight: 900; letter-spacing: -.5px; }
+.hero-sub { font-size: 13px; color: rgba(255,255,255,.65); margin-top: 5px; }
+
+.progress-wrap {
+  margin-top: 20px;
+  background: rgba(255,255,255,.12);
+  border-radius: 20px;
+  padding: 12px 16px;
+}
+.progress-label {
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: rgba(255,255,255,.85); margin-bottom: 8px;
+}
+.progress-bar-bg {
+  background: rgba(255,255,255,.18);
+  border-radius: 20px; height: 8px; overflow: hidden;
+}
+.progress-bar-fill {
+  background: #4fd1c5;
+  height: 100%; border-radius: 20px;
+  transition: width .3s ease;
+}
+
+.section {
+  background: #fff;
+  margin: 10px 14px;
+  border-radius: 16px;
+  padding: 4px 4px 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05);
+}
+.section-title {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 800;
+  padding: 14px 14px 8px;
+  color: #152736;
+}
+.item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 14px;
+  border-top: 1px solid #f5f5f7;
+}
+.item input[type="checkbox"] {
+  width: 20px; height: 20px; margin-top: 1px;
+  accent-color: #1b7aad; flex-shrink: 0; cursor: pointer;
+}
+.item label { flex: 1; font-size: 13.5px; line-height: 1.55; cursor: pointer; }
+.item.checked label { color: #b6b6b6; }
+.item .note { color: #999; text-decoration: none; }
+.deadline.urgent { color: #c4611a; font-weight: 700; }
+.urgent-flag { color: #c4611a; font-weight: 700; }
+.deadline.passed { color: #b6b6b6; text-decoration: line-through; }
+.item b { color: #152736; }
+.item.checked b { color: #c9c9c9; }
+.tag {
+  display: inline-block; font-size: 10.5px; font-weight: 700;
+  padding: 1px 7px; border-radius: 8px; margin-left: 4px;
+  background: #e8f0f5; color: #1b7aad; white-space: nowrap;
+}
+.tag-warn { background: #fef0e4; color: #c4611a; }
+
+.note-box {
+  margin: 10px 14px 0;
+  background: #fbf4e2;
+  border: 1px dashed #d9c584;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 12px; color: #8a7530; line-height: 1.6;
+}
+.note-box b { color: #6b5a1f; }
+
+.footer-link {
+  display: block;
+  text-align: center;
+  margin: 24px 14px 0;
+  padding: 14px;
+  background: #152736;
+  color: #fff;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <a class="hero-back" href="./202611_aus.html">← 여행 일정표로 돌아가기</a>
+  <div class="hero-title">✅ 예약 체크리스트</div>
+  <div class="hero-sub">호주 · 11/25 – 12/6</div>
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>진행 상황</span>
+      <span id="progressText">0 / 0</span>
+    </div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+  </div>
+  <div style="margin-top:10px; font-size:11px; color:rgba(255,255,255,.6);">
+    💾 체크 상태는 이 기기에 저장돼요
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">🚨 최우선</div>
+  <div class="item"><input type="checkbox" id="i1"><label for="i1"><b>호주 ETA(전자여행허가) 신청</b> — 공식 Australian ETA 앱, 1인 AUD 20 <span class="tag tag-warn">출발 전 필수</span> · 여권 정보 오타 확인, <b>전원 각자</b> 신청(엄마·준우 포함)</label></div>
+  <div class="item"><input type="checkbox" id="i2"><label for="i2"><b>오페라하우스 발레(12/3 19:30) 좌석 + 내부 투어 시간 예약</b> · 공연 날짜는 공식 사이트에서 먼저 확인</label></div>
+  <div class="item"><input type="checkbox" id="i3"><label for="i3"><b>그레이트 오션 로드 일일 투어 예약(12/1)</b> <span class="tag tag-warn">성수기 취소 제한</span> · 12월은 투어일 7일 전부터 변경·취소 불가인 곳이 있음, 규정 확인</label></div>
+</div>
+
+<div class="section">
+  <div class="section-title">✈️ 항공/교통</div>
+  <div class="item"><input type="checkbox" id="i4"><label for="i4">인천 → 시드니 (11/25) — 대한항공 KE401, 08:00 → 20:05 <i>(엄마와 둘이)</i></label></div>
+  <div class="item"><input type="checkbox" id="i5"><label for="i5">인천 → 시드니 (11/27) — 대한항공 KE401, 08:00 → 20:05 <i>(준우)</i></label></div>
+  <div class="item"><input type="checkbox" id="i6"><label for="i6">시드니 → 멜버른 (11/28) — 버진 오스트레일리아 VA834, 11:00 → 12:35</label></div>
+  <div class="item"><input type="checkbox" id="i7"><label for="i7">멜버른 → 시드니 (12/2) — 버진 오스트레일리아 VA837, 11:00 → 12:25</label></div>
+  <div class="item"><input type="checkbox" id="i8"><label for="i8">시드니 → 인천 (12/6) — 대한항공 KE402, 21:55 → 12/7 06:35</label></div>
+  <div class="item"><input type="checkbox" id="i9"><label for="i9">국내선(VA834·VA837) 위탁 수하물 포함 여부 확인</label></div>
+  <div style="padding:8px 14px; font-size:12px; color:#999; border-top:1px solid #f5f5f7;">💡 공항↔숙소 이동(시드니 공항 도착 11/25, 멜버른 공항 12:35 도착)은 택시/우버/열차 중 미리 정해두기</div>
+</div>
+
+<div class="section">
+  <div class="section-title">🏨 숙소</div>
+  <div class="item"><input type="checkbox" id="i10"><label for="i10">시드니 큰고모댁 (11/25~28) <i>(준우는 11/27 밤 합류)</i></label></div>
+  <div class="item"><input type="checkbox" id="i11"><label for="i11">멜버른 (11/28~12/2) — 메리톤 멜버른 <i>(140 King St)</i></label></div>
+  <div class="item"><input type="checkbox" id="i12"><label for="i12">시드니 (12/2~6) — 메리톤 월드타워</label></div>
+  <div style="padding:8px 14px; font-size:12px; color:#999; border-top:1px solid #f5f5f7;">💡 12/6은 저녁 출발이라 체크아웃 후 프런트 짐 보관 가능한지 확인</div>
+</div>
+
+<div class="section">
+  <div class="section-title">🎟 투어/체험</div>
+  <div class="item"><input type="checkbox" id="i13"><label for="i13">야라 밸리 와이너리 투어 (11/30, 도메인 샹동 런치 포함) — 인원 확정 예약</label></div>
+  <div class="item"><input type="checkbox" id="i14"><label for="i14">그레이트 오션 로드 헬기 투어 (12/1) — 코스(16분/25분 등)와 시간대 선택, 날씨 변경 규정 확인</label></div>
+  <div class="item"><input type="checkbox" id="i15"><label for="i15">오페라하우스 내부 투어 + 발레 (12/3, 발레 19:30)</label></div>
+  <div class="item"><input type="checkbox" id="i16"><label for="i16">타롱가 주 동물원 (12/3) — 온라인 티켓 구매 <span class="tag">선택</span></label></div>
+  <div class="item"><input type="checkbox" id="i17"><label for="i17">블루마운틴 전일 투어 (12/4) — 투어 상품 또는 렌터카 결정 후 예약</label></div>
+  <div style="padding:8px 14px; font-size:12px; color:#999; border-top:1px solid #f5f5f7;">💡 달링 하버 불꽃놀이(12/5)는 무료 관람이라 예약 불필요, 시간은 직전에 확인</div>
+</div>
+
+<div class="section">
+  <div class="section-title">⭐ 식사</div>
+  <div class="item"><input type="checkbox" id="i18"><label for="i18">정민 친구와 오찬 (11/29, 일) — 장소·시간 확정, 필요하면 식당 예약</label></div>
+</div>
+
+<div class="section">
+  <div class="section-title">📋 기타 준비물</div>
+  <div class="item"><input type="checkbox" id="i19"><label for="i19">여행자보험 (결항·지연 보장 확인)</label></div>
+  <div class="item"><input type="checkbox" id="i20"><label for="i20"><b>유심/이심</b> (호주 eSIM + 기존 유심 병행)</label></div>
+  <div class="item"><input type="checkbox" id="i21"><label for="i21">호주 달러 환전 또는 트래블카드</label></div>
+  <div class="item"><input type="checkbox" id="i22"><label for="i22">호주용 멀티 어댑터 (Type I)</label></div>
+  <div class="item"><input type="checkbox" id="i23"><label for="i23">왕복 항공권·숙소 예약 확인서 캡처본</label></div>
+  <div class="item"><input type="checkbox" id="i24"><label for="i24">휴대폰 충전기 · 보조배터리</label></div>
+  <div class="item"><input type="checkbox" id="i25"><label for="i25">입국 시 식품·목재·식물 등 검역 신고 대상 확인(컵라면·건조식품 포함)</label></div>
+</div>
+
+<div class="note-box">
+  <b>💡 참고</b><br>
+  · 호주 현지는 한국보다 2시간 빨라요 (시드니·멜버른 서머타임 기준)<br>
+  · 12월은 성수기라 투어·공연은 일찍 마감될 수 있어요<br>
+  · 취소·변경 기한은 예약처마다 달라서 예약 후 이 목록에 따로 메모하세요
+</div>
+
+<a class="footer-link" href="./202611_aus.html">📖 여행 일정표 보기</a>
+
+<script>
+  const checkboxes = document.querySelectorAll('.item input[type="checkbox"]');
+  const STORAGE_KEY = 'aus_checklist_v1';
+
+  function getLocalState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) { return {}; }
+  }
+  function setLocalState(state) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  function updateItemStyle(cb) {
+    cb.closest('.item').classList.toggle('checked', cb.checked);
+  }
+  function updateProgress() {
+    const total = checkboxes.length;
+    const done = [...checkboxes].filter(cb => cb.checked).length;
+    document.getElementById('progressText').textContent = `${done} / ${total}`;
+    document.getElementById('progressFill').style.width = total ? `${(done / total) * 100}%` : '0%';
+  }
+  function applyState(state) {
+    checkboxes.forEach(cb => {
+      if (state[cb.id] !== undefined) cb.checked = state[cb.id];
+      updateItemStyle(cb);
+    });
+    updateProgress();
+  }
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      updateItemStyle(cb);
+      updateProgress();
+      const state = {};
+      checkboxes.forEach(c => { state[c.id] = c.checked; });
+      setLocalState(state);
+    });
+  });
+  applyState(getLocalState());
+</script>
+
+</body>
+</html>
