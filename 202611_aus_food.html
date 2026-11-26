@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>🍽 호주 맛집 리스트</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #f2f2f4;
+    color: #1a1a1a;
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding-bottom: 40px;
+  }
+
+.hero {
+  background: linear-gradient(160deg, #082840 0%, #0f4c75 55%, #1b7aad 100%);
+  padding: 44px 24px 28px;
+  color: #fff;
+}
+.hero-back {
+  display: inline-block;
+  font-size: 12px;
+  color: rgba(255,255,255,.7);
+  text-decoration: none;
+  margin-bottom: 14px;
+}
+.hero-title { font-size: 24px; font-weight: 900; letter-spacing: -.5px; }
+.hero-sub { font-size: 13px; color: rgba(255,255,255,.65); margin-top: 5px; }
+
+.progress-wrap {
+  margin-top: 20px;
+  background: rgba(255,255,255,.12);
+  border-radius: 20px;
+  padding: 12px 16px;
+}
+.progress-label {
+  display: flex; justify-content: space-between;
+  font-size: 12px; color: rgba(255,255,255,.85); margin-bottom: 8px;
+}
+.progress-bar-bg {
+  background: rgba(255,255,255,.18);
+  border-radius: 20px; height: 8px; overflow: hidden;
+}
+.progress-bar-fill {
+  background: #4fd1c5;
+  height: 100%; border-radius: 20px;
+  transition: width .3s ease;
+}
+
+.section {
+  background: #fff;
+  margin: 10px 14px;
+  border-radius: 16px;
+  padding: 4px 4px 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05);
+}
+.section-title {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 800;
+  padding: 14px 14px 8px;
+  color: #152736;
+}
+.item {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 10px 14px;
+  border-top: 1px solid #f5f5f7;
+}
+.item input[type="checkbox"] {
+  width: 20px; height: 20px; margin-top: 1px;
+  accent-color: #1b7aad; flex-shrink: 0; cursor: pointer;
+}
+.item label { flex: 1; font-size: 13.5px; line-height: 1.55; cursor: pointer; }
+.item.checked label { color: #b6b6b6; }
+.item .note { color: #999; text-decoration: none; }
+.deadline.urgent { color: #c4611a; font-weight: 700; }
+.urgent-flag { color: #c4611a; font-weight: 700; }
+.deadline.passed { color: #b6b6b6; text-decoration: line-through; }
+.item b { color: #152736; }
+.item.checked b { color: #c9c9c9; }
+.tag {
+  display: inline-block; font-size: 10.5px; font-weight: 700;
+  padding: 1px 7px; border-radius: 8px; margin-left: 4px;
+  background: #e8f0f5; color: #1b7aad; white-space: nowrap;
+}
+.tag-warn { background: #fef0e4; color: #c4611a; }
+
+.note-box {
+  margin: 10px 14px 0;
+  background: #fbf4e2;
+  border: 1px dashed #d9c584;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 12px; color: #8a7530; line-height: 1.6;
+}
+.note-box b { color: #6b5a1f; }
+
+.footer-link {
+  display: block;
+  text-align: center;
+  margin: 24px 14px 0;
+  padding: 14px;
+  background: #152736;
+  color: #fff;
+  border-radius: 14px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.city-nav { display:flex; gap:8px; flex-wrap:wrap; margin:16px 14px; }
+.city-chip {
+  font-size:12px; font-weight:700; background:#fff; color:#1b7aad;
+  padding:6px 12px; border-radius:20px; text-decoration:none;
+  box-shadow:0 1px 3px rgba(0,0,0,.06);
+}
+.city-section { background:#fff; margin:10px 14px; border-radius:16px; padding:16px 16px 6px; box-shadow:0 1px 3px rgba(0,0,0,.05); }
+.city-title { font-size:17px; font-weight:900; color:#152736; margin-bottom:2px; }
+.city-note { font-size:11.5px; color:#999; margin-bottom:12px; }
+.meal-block { margin-bottom:14px; }
+.meal-label { display:inline-block; font-size:11px; font-weight:800; padding:3px 10px; border-radius:8px; margin-bottom:6px; }
+.meal-label.cafe { background:#fdece1; color:#a8461f; }
+.meal-label.meal { background:#e2f5ec; color:#1e8c5e; }
+.place { padding:10px 0; border-top:1px solid #f5f5f7; }
+.place:first-of-type { border-top:none; }
+.place-top { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
+.place-name { font-size:13.5px; font-weight:700; color:#152736; line-height:1.5; }
+.place-map { font-size:11px; font-weight:600; color:#1b7aad; text-decoration:underline; white-space:nowrap; margin-top:2px; }
+.place-meta { font-size:12px; font-weight:700; color:#c4611a; margin-top:1px; }
+.place-meta span { color:#999; font-weight:500; }
+.place-desc { font-size:12px; color:#666; line-height:1.55; margin-top:3px; }
+.place-sub { font-size:11.5px; color:#999; line-height:1.5; margin-top:2px; }
+.tag-green { background:#e2f5ec; color:#1e8c5e; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <a class="hero-back" href="./202611_aus.html">← 여행 일정표로 돌아가기</a>
+  <div class="hero-title">🍽 맛집 리스트</div>
+  <div class="hero-sub">호주 · 시드니 12곳 + 멜버른 8곳 (총 20곳)</div>
+</div>
+
+<div class="city-nav">
+  <a class="city-chip" href="#sydney">🌊 Sydney (12)</a>
+  <a class="city-chip" href="#melbourne">🏙 Melbourne (8)</a>
+</div>
+
+<div class="note-box" style="margin-top:0;">
+  📍 구글 지도 평점·리뷰 수·리뷰 내용을 기준으로 골랐어요(조사 시점 값이라 방문 전 다시 확인하세요). 한국어 후기는 개별 확인하지 못했어요. <b>예약 권장</b> 태그는 후기에서 예약을 권했거나 인기 많은 저녁 식당에 붙였어요.
+</div>
+
+<div class="city-section" id="sydney">
+  <div class="city-title">🌊 Sydney</div>
+  <div class="city-note">12/2 ~ 12/6 일정 기준</div>
+  <div class="meal-block">
+    <span class="meal-label cafe">☕ 카페·브런치</span>
+  <div class="place">
+    <div class="place-top">
+      <div class="place-name">Makaveli Bondi </div>
+      <a class="place-map" href="https://www.google.com/maps/search/?api=1&amp;query=Makaveli%20Bondi&amp;query_place_id=ChIJg21HcuWtEmsRD8RbcntLdfM" target="_blank" rel="noopener">📍지도</a>
+    </div>
+    <div class="place-meta">★ 4.9 <span>(1,589건)</span></div>
+    <div class="place-desc">본다이 브런치. 모닝 플레이트와 커피가 좋다는 후기가 많고, 가격 대비 만족도가 높다는 평이 있어요. 빨간 살사는 아주 매워요.</div>
+    <div class="place-sub">🕒 매일 06:00~ (월요일은 12시까지)</div>
+    <div class="place-sub">🗓 추천: 12/5(토) 본다이 아침</div>
+  </div>
+  <div class="place">
+    <div class="place-top">
+      <div class="place-name">Cafe Bondi </div>
+      <a class="place-map" href="https://www.google.com/maps/search/?api=1&amp;query=Cafe%20Bondi&amp;query_place_id=ChIJe6WD2B2tEmsRTMttkWiu4jc" target="_blank" rel="noopener">📍지도</a>
+    </div>
+    <div class="place-meta">★ 4.7 <span>(507건)</span></div>
+    <div class="place-desc">북 본다이 해변을 내려다보는 야외석. 프렌치토스트와 부라타 스크램블 에그가 호평이에요. 자리가 약간 좁다는 후기도 있어요.</div>
+    <div class="place-sub">🕒 06:30~14:30 (금~일 15:00까지)</div>
+    <div class="place-sub">🗓 추천: 12/5(토) 본다이 아침</div>
+  </div>
+  <div class="place">
+    <div class="place-top">
+      <div class="place-name">Joe Black Cafe </div>
+      <a class="place-map" href="https://www.google.com/maps/search/?api=1&amp;query=Joe%20Black%20Cafe&amp;query_place_id=ChIJD8LJ3BeuEmsRniBzZDzdfPk" target="_blank" rel="noopener">📍지도</a>
+    </div>
+    <div class="place-meta">★ 4.7 <span>(1,203건)</span></div>
+    <div class="place-desc">CBD의 가족 운영 카페. 커피와 브런치가 꾸준히 좋고 단골이 많다는 후기예요.</div>
+    <div class="place-sub">🕒 평일 06:00~16:00 / 주말 08:00~14:00</div>
+    <div class="place-sub">🗓 추천: 12/3(목) 미술관 가기 전 아침</div>
+  </div>
+  <div class="place">
+    <div class="place-top">
+      <div class="place-name">Noelle&#x27;s cafe <span class="tag tag-warn">예약 권장</span></div>
+      <a class="place-map" href="https://www.google.com/maps/search/?api=1&amp;query=Noelle%27s%20cafe&amp;query_place_id=ChIJI1ZS7PuvEmsR8UsS_WVzmWE" target="_blank" rel="noopener">📍지도</a>
+    </div>
+    <div class="place-meta">★ 4.9 <span>(849건)</span></div>
+    <div class="place-desc">하마켓의 작은 브런치 카페. 빅 브렉퍼스트와 아보카도 토스트, 신선 주스가 호평이에요. 자리가 적어서 후기에서 예약을 권했어요.</div>
+    <div class="place-sub">🕒 매일 07:00~15:00</div>
+    <div class="place-sub">🗓 추천: 12/2~12/3 아침</div>
+  </div>
+  <div class="place">
+    <div class="place-top">
+      <div class="place-name">Diggy Doo&#x27;s Coffee <span class="tag">대기 줄</span></div>
+      <a class="place-map" href="https://www.google.com/maps/search/?api=1&amp;query=Diggy%20Doo%27s%20Coffee&amp;query_place_id=ChIJN52xUOyvEmsRs3KAeEx_g9I" target="_blank" rel="noopener">📍지도</a>
+    </div>
+    <div class="place-meta">★ 4.8 <span>(678건)</span></div>
+    <div class="place-desc">아케이드 지하의 스페셜티 카페. 플랫 화이트와 바나나 브레드가 인기고 줄이 길다는 후기가 많아요. 자리는 적어요.</div>
+    <div class="place-sub">🕒 평일 07:00~15:00 / 주말 08:30~14:30</div>
+    <div class="place-sub">🗓 추천: 12/2~12/3 서큘러 키 근처</div>
+  </div>
+  <div class="place">
+    <div class="place-top">
+      <div class="place-name">Beta Coffee </div>
+      <a class="place-map" href="https://www.google.com/maps/search/?api=1&amp;query=Beta%20Coffee&amp;query_place_id=ChIJTdOcfACvEmsRaOwUBf8ZlNQ" target="_blank" rel="noopener">📍지도</a>
+    </div>
+    <div class="place-meta">★ 4.7 <span>(305건)</span></div>
+    <div class="place-desc">서리 힐스의 스페셜티 카페. 하우스 블렌드와 필터 커피, 직원 서비스가 좋다는 후기예요. 세계 순위 언급은 후기마다 달라서 참고만 하세요.</div>
+    <div class="place-sub">🕒 평일 07:00~16:00 / 주말 08:00~15:30</div>
+    <div class="place-sub">🗓 추천: 12/3(목) 미술관 방향</div>
+  </div>
+  </div>
+  <div class="meal-block">
+    <span class="meal-label meal">🍽 식사</span>
+  <div class="place">
+    <div class="place-top">
+      <div class="place-name">Bouillon L&#x27;Entrecôte <span class="tag tag-warn">예약 권장</span></div>
+      <a class="place-map" href="https://www.google.com/maps/search/?api=1&amp;query=Bouillon%20L%27Entrec%C3%B4te&amp;query_place_id=ChIJAdgvpTSvEmsRG2zKBNpxNTo" target="_blank" rel="noopener">📍지도</a>
+    </div>
+    <div class="place-meta">★ 4.7 <span>(2,321건)</span></div>
+    <div class="place-desc">서큘러 키 근처 프랑스식 스테이크 프리트. 스테이크, 양파 수프, 에스카르고가 호평이고 서비스가 친절하다는 후기가 많아요.</div>
+    <div class="place-sub">🕒 매일 11:30~22:00</div>
+    <div class="place-sub">🗓 추천: 12/3(목) 발레 전 저녁 (17:30쯤)</div>
+  </div>
+  <div class="place">
+    <div class="place-top">
+      <div class="place-name">Dae Jang Kum <span class="tag">대기 줄</span></div>
+      <a class="place-map" href="https://www.google.com/maps/search/?api=1&amp;query=Dae%20Jang%20Kum&amp;query_place_id=ChIJ9ZxusjyuEmsRF8mdB6sPOuk" target="_blank" rel="noopener">📍지도</a>
+    </div>
+    <div class="place-meta">★ 4.7 <span>(6,408건)</span></div>
+    <div class="place-desc">하마켓 한식 BBQ. 고기 질과 반찬 양이 호평이고, 붐비는 시간엔 문 앞까지 줄이 선다는 후기가 있어요.</div>
+    <div class="place-sub">🕒 12:00~24:00 (금·토 02:00까지)</div>
+    <div class="place-sub">🗓 추천: 12/2(수) 도착일 저녁</div>
+  </div>
+  <div class="place">
+    <div class="place-top">
+      <div class="place-name">JIHO Hanbang Samgyetang <span class="tag">대기 줄</span></div>
+      <a class="place-map" href="https://www.google.com/maps/search/?api=1&amp;query=JIHO%20Hanbang%20Samgyetang&amp;query_place_id=ChIJ2wXkjIWvEmsRreVX6KbIWMY" target="_blank" rel="noopener">📍지도</a>
+    </div>
+    <div class="place-meta">★ 4.8 <span>(2,166건)</span></div>
+    <div class="place-desc">삼계탕과 로스트 치킨. 삼계탕의 어린 닭이 부드럽다는 후기가 많고, 로스트 치킨은 약간 퍽퍽하다는 평도 있어요. 저녁엔 대기가 생겨요.</div>
+    <div class="place-sub">🕒 11:00~15:00, 16:00~22:30 (토 11:00~23:00)</div>
+    <div class="place-sub">🗓 추천: 12/2 또는 12/5 한식</div>
+  </div>
+  <div class="place">
+    <div class="place-top">
+      <div class="place-name">Luna Lu (The Rocks) <span class="tag tag-warn">예약 권장</span></div>
+      <a class="place-map" href="https://www.google.com/maps/search/?api=1&amp;query=Luna%20Lu%20%28The%20Rocks%29&amp;query_place_id=ChIJr9lSEmuvEmsRRD_l58GVOKk" target="_blank" rel="noopener">📍지도</a>
+    </div>
+    <div class="place-meta">★ 4.7 <span>(3,169건)</span></div>
+    <div class="place-desc">오페라하우스와 하버브리지가 같이 보이는 레스토랑. 서비스가 친절하다는 평이 많지만, 음식은 호주식 중식이라 달고 기름지다는 후기도 있어요. 뷰 위주로 가는 곳이에요.</div>
+    <div class="place-sub">🕒 12:00~21:00 (금·토 22:00까지)</div>
+    <div class="place-sub">🗓 추천: 12/2(수) 저녁 (뷰 좌석은 예약)</div>
+  </div>
+  <div class="place">
+    <div class="place-top">
+      <div class="place-name">Harry&#x27;s Café de Wheels (Woolloomooloo) </div>
+      <a class="place-map" href="https://www.google.com/maps/search/?api=1&amp;query=Harry%27s%20Caf%C3%A9%20de%20Wheels%20%28Woolloomooloo%29&amp;query_place_id=ChIJe_2ak22uEmsRnSWFP7OKD4k" target="_blank" rel="noopener">📍지도</a>
+    </div>
+    <div class="place-meta">★ 4.3 <span>(2,932건)</span></div>
+    <div class="place-desc">1938년부터 이어진 파이 가게. 타이거 파이(감자·완두·그레이비)가 대표이고 맛은 평범하다는 후기도 있어요. 갈매기 조심하세요.</div>
+    <div class="place-sub">🕒 평일 09:00~22:00 / 금·토 ~23:30</div>
+    <div class="place-sub">🗓 추천: 12/6(일) 낮 간식</div>
+  </div>
+  <div class="place">
+    <div class="place-top">
+      <div class="place-name">Sydney Fish Market </div>
+      <a class="place-map" href="https://www.google.com/maps/search/?api=1&amp;query=Sydney%20Fish%20Market&amp;query_place_id=ChIJqy_-dTGuEmsRtBGe8eEFI8E" target="_blank" rel="noopener">📍지도</a>
+    </div>
+    <div class="place-meta">★ 4.2 <span>(30,989건)</span></div>
+    <div class="place-desc">새로 연 건물의 해산물 시장. 굴과 새우가 신선하다는 후기가 많지만 피크 시간엔 매우 붐비고 가격이 높다는 평도 있어요. 한산한 시간대를 추천해요.</div>
+    <div class="place-sub">🕒 매일 07:00~22:00</div>
+    <div class="place-sub">🗓 추천: 12/6(일) 점심</div>
+  </div>
+  </div>
+</div>
+
+<div class="city-section" id="melbourne">
+  <div class="city-title">🏙 Melbourne</div>
+  <div class="city-note">11/28 ~ 12/1 일정 기준</div>
+  <div class="meal-block">
+    <span class="meal-label cafe">☕ 카페·브런치</span>
+  <div class="place">
+    <div class="place-top">
+      <div class="place-name">Brick Lane Melbourne <span class="tag">대기 줄</span></div>
+      <a class="place-map" href="https://www.google.com/maps/search/?api=1&amp;query=Brick%20Lane%20Melbourne&amp;query_place_id=ChIJjQLxXzVd1moRm6Cg5UkgViI" target="_blank" rel="noopener">📍지도</a>
+    </div>
+    <div class="place-meta">★ 4.4 <span>(2,935건)</span></div>
+    <div class="place-desc">라인웨이 안의 브런치. 스매시드 아보카도와 칠리 스크램블 에그가 호평이에요. 이름 적고 기다리는 방식이고 주말 대기는 20~30분이에요.</div>
+    <div class="place-sub">🕒 평일 07:30~14:30 / 주말 08:00~14:30</div>
+    <div class="place-sub">🗓 추천: 11/29(일) 아침</div>
+  </div>
+  <div class="place">
+    <div class="place-top">
+      <div class="place-name">Overlay Coffee <span class="tag">대기 줄</span></div>
+      <a class="place-map" href="https://www.google.com/maps/search/?api=1&amp;query=Overlay%20Coffee&amp;query_place_id=ChIJ25x2xuFd1moRVl-vqCL_ZGo" target="_blank" rel="noopener">📍지도</a>
+    </div>
+    <div class="place-meta">★ 4.5 <span>(755건)</span></div>
+    <div class="place-desc">피넛 크림 라떼가 시그니처예요. 줄이 길어도 빠르게 빠진다는 후기가 많아요. 자리는 좁고 테이크아웃이 많아요.</div>
+    <div class="place-sub">🕒 평일 07:30~16:00 / 주말 08:00~16:00</div>
+    <div class="place-sub">🗓 추천: 11/28(토) 오후 또는 12/1(화) 오전</div>
+  </div>
+  <div class="place">
+    <div class="place-top">
+      <div class="place-name">Little Rogue. </div>
+      <a class="place-map" href="https://www.google.com/maps/search/?api=1&amp;query=Little%20Rogue.&amp;query_place_id=ChIJFydOVspC1moRMHTFc063-pU" target="_blank" rel="noopener">📍지도</a>
+    </div>
+    <div class="place-meta">★ 4.6 <span>(1,921건)</span></div>
+    <div class="place-desc">골목 안 작은 카페. 벚꽃 라떼가 좋다는 후기가 많고, 말차는 평이 갈려요. 야외 테이블이 몇 개뿐이에요.</div>
+    <div class="place-sub">🕒 평일 07:30~17:00 / 주말 08:30~17:00</div>
+    <div class="place-sub">🗓 추천: 11/29(일) 마켓 후</div>
+  </div>
+  </div>
+  <div class="meal-block">
+    <span class="meal-label meal">🍽 식사</span>
+  <div class="place">
+    <div class="place-top">
+      <div class="place-name">Hansik Melbourne <span class="tag">대기 줄</span></div>
+      <a class="place-map" href="https://www.google.com/maps/search/?api=1&amp;query=Hansik%20Melbourne&amp;query_place_id=ChIJtyTn0GJD1moRIWkP2PVh_aA" target="_blank" rel="noopener">📍지도</a>
+    </div>
+    <div class="place-meta">★ 4.8 <span>(815건)</span></div>
+    <div class="place-desc">한식 세트와 반찬이 푸짐한 곳. 갈비탕, 칼국수, 옥수수 크림볼이 호평이고, 저녁에는 짧은 대기가 있다는 후기예요.</div>
+    <div class="place-sub">🕒 11:30~15:00, 17:00~24:00 (금·토 01:00까지)</div>
+    <div class="place-sub">🗓 추천: 11/28(토) 도착일 저녁</div>
+  </div>
+  <div class="place">
+    <div class="place-top">
+      <div class="place-name">HongDae Korean Restaurant &amp; Bar <span class="tag tag-green">현금 할인</span></div>
+      <a class="place-map" href="https://www.google.com/maps/search/?api=1&amp;query=HongDae%20Korean%20Restaurant%20%26%20Bar&amp;query_place_id=ChIJnwJfvClD1moR_UTOOeGNmRE" target="_blank" rel="noopener">📍지도</a>
+    </div>
+    <div class="place-meta">★ 4.8 <span>(1,276건)</span></div>
+    <div class="place-desc">새벽 1시 반까지 하는 한식당. 테이블 조리 닭갈비와 삼겹살이 호평이고, 양이 많다는 후기가 많아요. 현금 결제 할인이 있다는 후기가 있어요.</div>
+    <div class="place-sub">🕒 평일 11:30~15:00, 17:30~01:30 / 주말은 17:30부터</div>
+    <div class="place-sub">🗓 추천: 11/30(월) 투어 후 늦은 저녁</div>
+  </div>
+  <div class="place">
+    <div class="place-top">
+      <div class="place-name">Golmokgil </div>
+      <a class="place-map" href="https://www.google.com/maps/search/?api=1&amp;query=Golmokgil&amp;query_place_id=ChIJ6Vth05hD1moRTDGBi_YoX5k" target="_blank" rel="noopener">📍지도</a>
+    </div>
+    <div class="place-meta">★ 4.7 <span>(1,635건)</span></div>
+    <div class="place-desc">치킨, 핫팟, 떡볶이. 15명 단체가 예약 없이 갔다는 후기가 있을 만큼 자리가 넓은 편이에요.</div>
+    <div class="place-sub">🕒 매일 17:00~01:00 (금·토 02:00까지)</div>
+    <div class="place-sub">🗓 추천: 11/29(일) 저녁 등 한식이 당길 때</div>
+  </div>
+  <div class="place">
+    <div class="place-top">
+      <div class="place-name">Pastuso <span class="tag tag-warn">예약 권장</span></div>
+      <a class="place-map" href="https://www.google.com/maps/search/?api=1&amp;query=Pastuso&amp;query_place_id=ChIJ2QMv5rdC1moRlTlxgCFLl0M" target="_blank" rel="noopener">📍지도</a>
+    </div>
+    <div class="place-meta">★ 4.6 <span>(4,257건)</span></div>
+    <div class="place-desc">페루 요리 전문점. 세비체(킹피시)와 스테이크, 서비스가 호평이에요. 후기에서 '멜버른 최고의 저녁 중 하나'라는 평이 있어요.</div>
+    <div class="place-sub">🕒 매일 12:00~22:00 (금·토 22:30까지)</div>
+    <div class="place-sub">🗓 추천: 11/30(월) 저녁 (투어 후 18:30쯤)</div>
+  </div>
+  <div class="place">
+    <div class="place-top">
+      <div class="place-name">Cha Ching <span class="tag tag-warn">예약 권장</span></div>
+      <a class="place-map" href="https://www.google.com/maps/search/?api=1&amp;query=Cha%20Ching&amp;query_place_id=ChIJ17x1GGFD1moRkEGE5vT2xtE" target="_blank" rel="noopener">📍지도</a>
+    </div>
+    <div class="place-meta">★ 4.7 <span>(2,743건)</span></div>
+    <div class="place-desc">아시안 퓨전. Feed Me 메뉴와 칵테일이 호평이에요. 가게가 작아서 단체는 비좁다는 후기가 있어요.</div>
+    <div class="place-sub">🕒 11:30~21:00 (금·토 23:00까지)</div>
+    <div class="place-sub">🗓 추천: 11/28~11/29 저녁</div>
+  </div>
+  </div>
+</div>
+
+<div class="note-box">
+  <b>💡 참고</b><br>
+  · 주말(11/28, 11/29, 12/5, 12/6)에는 카페·식당에 주말 서차지가 붙을 수 있어요<br>
+  · 영업시간과 휴무일은 바뀔 수 있으니 방문 전 구글 지도에서 확인하세요<br>
+  · 한식당은 현금 할인이나 서비스 방식이 가게마다 달라요
+</div>
+
+<a class="footer-link" href="./202611_aus.html">📖 여행 일정표 보기</a>
+
+</body>
+</html>
